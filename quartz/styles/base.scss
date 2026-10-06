@@ -442,6 +442,7 @@ pre {
   border-radius: 5px;
   overflow-x: auto;
   border: 1px solid var(--lightgray);
+  background-color: var(--lightgray);
   position: relative;
 
   &:has(> code.mermaid) {
