@@ -62,8 +62,13 @@ async function _navigate(url: URL, isBack: boolean = false) {
   isNavigating = true
   startLoading()
   p = p || new DOMParser()
+  // `url` is the href as clicked, which may 301 (e.g. a folder link missing
+  // its trailing slash). Track where the fetch actually landed so history
+  // and relative-URL resolution stay consistent with the real location.
+  let finalUrl = url
   const contents = await fetchCanonical(url)
     .then((res) => {
+      finalUrl = new URL(res.url)
       const contentType = res.headers.get("content-type")
       if (contentType?.startsWith("text/html")) {
         return res.text()
@@ -86,7 +91,7 @@ async function _navigate(url: URL, isBack: boolean = false) {
   cleanupFns.clear()
 
   const html = p.parseFromString(contents, "text/html")
-  normalizeRelativeURLs(html, url)
+  normalizeRelativeURLs(html, finalUrl)
 
   let title = html.querySelector("title")?.textContent
   if (title) {
@@ -106,8 +111,8 @@ async function _navigate(url: URL, isBack: boolean = false) {
 
   // scroll into place and add history
   if (!isBack) {
-    if (url.hash) {
-      const el = document.getElementById(decodeURIComponent(url.hash.substring(1)))
+    if (finalUrl.hash) {
+      const el = document.getElementById(decodeURIComponent(finalUrl.hash.substring(1)))
       el?.scrollIntoView()
     } else {
       window.scrollTo({ top: 0 })
@@ -123,7 +128,7 @@ async function _navigate(url: URL, isBack: boolean = false) {
   // delay setting the url until now
   // at this point everything is loaded so changing the url should resolve to the correct addresses
   if (!isBack) {
-    history.pushState({}, "", url)
+    history.pushState({}, "", finalUrl)
   }
 
   notifyNav(getFullSlug(window))
