@@ -4,8 +4,8 @@ title: Security Wiki
 
 セキュリティ脆弱性・インシデント・対策・ツールに関する個人Wikiです。
 
-- [[countermeasures]]
-- [[incidents]]
-- [[tools]]
-- [[vulnerabilities]]
-- [[glossary]]
+- [[対策]]
+- [[インシデント]]
+- [[ツール]]
+- [[脆弱性]]
+- [[用語集]]
