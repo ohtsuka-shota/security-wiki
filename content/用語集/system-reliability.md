@@ -40,6 +40,51 @@ tags: ["glossary"]
 ## RAID
 複数のハードディスク(またはSSD)を組み合わせて、冗長性や性能を向上させる技術(Redundant Array of Independent Disks)。同じデータを2台に同時に書き込むことで1台が故障してもデータが失われないミラーリング(RAID1)、データとは別に誤り訂正用の情報(パリティ)を複数台に分散して記録することで、1台の故障時でもデータを復元できるRAID5など、要求される冗長性・性能・コストのバランスに応じて複数の構成方式が選べる。
 
+<figure>
+<svg viewBox="0 0 640 220" role="img" aria-label="RAID0・RAID1・RAID5の図解: ディスクへのデータの分散方法の違いを比較する" style="max-width:100%;height:auto;">
+  <g font-size="11" fill="currentColor">
+    <text x="90" y="20" text-anchor="middle">RAID0(ストライピング)</text>
+    <rect x="30" y="30" width="60" height="50" fill="none" stroke="currentColor" stroke-width="1.5"/>
+    <text x="60" y="60" text-anchor="middle">A1</text>
+    <rect x="100" y="30" width="60" height="50" fill="none" stroke="currentColor" stroke-width="1.5"/>
+    <text x="130" y="60" text-anchor="middle">A2</text>
+    <text x="95" y="100" text-anchor="middle" font-size="10">容量=合算、冗長性なし</text>
+    <text x="95" y="114" text-anchor="middle" font-size="10">1台故障で全データ失う</text>
+  </g>
+
+  <g font-size="11" fill="currentColor">
+    <text x="320" y="20" text-anchor="middle">RAID1(ミラーリング)</text>
+    <rect x="260" y="30" width="60" height="50" fill="none" stroke="currentColor" stroke-width="1.5"/>
+    <text x="290" y="60" text-anchor="middle">A</text>
+    <rect x="330" y="30" width="60" height="50" fill="none" stroke="currentColor" stroke-width="1.5"/>
+    <text x="360" y="60" text-anchor="middle">A(複製)</text>
+    <text x="325" y="100" text-anchor="middle" font-size="10">容量=1台分</text>
+    <text x="325" y="114" text-anchor="middle" font-size="10">1台故障でも安全</text>
+  </g>
+
+  <g font-size="11" fill="currentColor">
+    <text x="555" y="20" text-anchor="middle">RAID5(分散パリティ)</text>
+    <rect x="460" y="30" width="55" height="40" stroke-width="1.5" style="stroke:var(--secondary)" fill="none"/>
+    <text x="487" y="55" text-anchor="middle" style="fill:var(--secondary)">A1</text>
+    <rect x="520" y="30" width="55" height="40" stroke-width="1.5" style="stroke:var(--secondary)" fill="none"/>
+    <text x="547" y="55" text-anchor="middle" style="fill:var(--secondary)">A2</text>
+    <rect x="580" y="30" width="55" height="40" stroke-width="1.5" style="stroke:var(--secondary)" fill="none"/>
+    <text x="607" y="55" text-anchor="middle" style="fill:var(--secondary)">Ap</text>
+
+    <rect x="460" y="75" width="55" height="40" fill="none" stroke="currentColor" stroke-width="1.5"/>
+    <text x="487" y="100" text-anchor="middle">B1</text>
+    <rect x="520" y="75" width="55" height="40" fill="none" stroke="currentColor" stroke-width="1.5"/>
+    <text x="547" y="100" text-anchor="middle">Bp</text>
+    <rect x="580" y="75" width="55" height="40" fill="none" stroke="currentColor" stroke-width="1.5"/>
+    <text x="607" y="100" text-anchor="middle">B2</text>
+
+    <text x="547" y="135" text-anchor="middle" font-size="10">容量≈(n-1)台分</text>
+    <text x="547" y="149" text-anchor="middle" font-size="10">パリティ(P)で1台故障まで耐える</text>
+  </g>
+</svg>
+<figcaption>RAID0は速度と容量を優先して冗長性を持たず、RAID1は複製によりシンプルに冗長化し、RAID5はパリティを分散配置することで容量効率と冗長性を両立する。</figcaption>
+</figure>
+
 ## バックアップ(フル・差分・増分)
 フルバックアップは全データを対象にする方式で、復元が1世代分のデータだけで完結する分かりやすさがある一方、バックアップにかかる時間・容量が大きい。差分バックアップは前回のフルバックアップ以降に変更されたデータのみを対象とする方式で、復元時にはフルバックアップと最新の差分の2つが必要になる。増分バックアップは直前のバックアップ(フルまたは増分)以降の変更分のみを対象とする方式で、バックアップ自体は最も効率的だが、復元時にはフルバックアップとそれ以降のすべての増分を順番に適用する必要があり、復元の手順がやや複雑になる。
 

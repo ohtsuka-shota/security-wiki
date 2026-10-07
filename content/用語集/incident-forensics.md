@@ -7,6 +7,43 @@ tags: ["glossary"]
 ## インシデントレスポンス
 セキュリティインシデント発生時に、検知・分析・封じ込め・復旧・事後対応までを体系的に行う一連の活動。思いつきで対応すると被害の拡大を招いたり、重要な証拠を失ったりするため、あらかじめ定められた手順(インシデント対応計画)に沿って、冷静かつ組織的に対応を進めることが重要になる。この一連の活動の中核を担うのが前述のCSIRTであり、各フェーズでの判断の速さと正確さがその後の被害の大きさを左右する。
 
+<figure>
+<svg viewBox="0 0 680 180" role="img" aria-label="インシデントレスポンスのライフサイクルの図解: 準備から検知・分析、封じ込め、根絶、復旧、事後対応までを経て、教訓が次の準備に反映される" style="max-width:100%;height:auto;">
+  <defs>
+    <marker id="arrow-ir" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="currentColor"/>
+    </marker>
+  </defs>
+  <g font-size="11" fill="currentColor">
+    <rect x="10" y="50" width="95" height="44" fill="none" stroke="currentColor" stroke-width="1.5"/>
+    <text x="57" y="75" text-anchor="middle">準備</text>
+    <line x1="105" y1="72" x2="123" y2="72" stroke="currentColor" stroke-width="1.5" marker-end="url(#arrow-ir)"/>
+
+    <rect x="125" y="50" width="100" height="44" fill="none" stroke="currentColor" stroke-width="1.5"/>
+    <text x="175" y="75" text-anchor="middle">検知・分析</text>
+    <line x1="225" y1="72" x2="243" y2="72" stroke="currentColor" stroke-width="1.5" marker-end="url(#arrow-ir)"/>
+
+    <rect x="245" y="50" width="100" height="44" fill="none" stroke="currentColor" stroke-width="1.5"/>
+    <text x="295" y="75" text-anchor="middle">封じ込め</text>
+    <line x1="345" y1="72" x2="363" y2="72" stroke="currentColor" stroke-width="1.5" marker-end="url(#arrow-ir)"/>
+
+    <rect x="365" y="50" width="90" height="44" fill="none" stroke="currentColor" stroke-width="1.5"/>
+    <text x="410" y="75" text-anchor="middle">根絶</text>
+    <line x1="455" y1="72" x2="473" y2="72" stroke="currentColor" stroke-width="1.5" marker-end="url(#arrow-ir)"/>
+
+    <rect x="475" y="50" width="90" height="44" fill="none" stroke="currentColor" stroke-width="1.5"/>
+    <text x="520" y="75" text-anchor="middle">復旧</text>
+    <line x1="565" y1="72" x2="583" y2="72" stroke="currentColor" stroke-width="1.5" marker-end="url(#arrow-ir)"/>
+
+    <rect x="585" y="50" width="90" height="44" stroke-width="1.5" style="stroke:var(--secondary)" fill="none"/>
+    <text x="630" y="75" text-anchor="middle" style="fill:var(--secondary)">事後対応</text>
+  </g>
+  <path d="M630,94 Q630,150 57,150 Q57,150 57,96" fill="none" stroke-width="1.5" style="stroke:var(--secondary)" marker-end="url(#arrow-ir)"/>
+  <text x="340" y="165" text-anchor="middle" font-size="10" style="fill:var(--secondary)">教訓を次の準備(体制・手順の見直し)に反映</text>
+</svg>
+<figcaption>インシデント対応は一direction方向の処理では終わらず、事後対応で得た教訓を次の準備フェーズに反映することで、組織の対応力を継続的に改善していく循環構造になっている。</figcaption>
+</figure>
+
 ## トリアージ
 発生したインシデントや検知アラートの緊急度・重要度を判断し、対応の優先順位を決定する作業。SOCやCSIRTには日々大量のアラートが寄せられるため、すべてに同じ時間をかけて対応することは現実的ではなく、影響範囲の大きさや攻撃の進行度を見極めて「今すぐ対応すべきもの」と「後回しにできるもの」を素早く選別する必要がある。医療現場での患者の重症度判定(トリアージ)に由来する用語で、この見極めの精度がインシデント対応全体の効率を大きく左右する。
 

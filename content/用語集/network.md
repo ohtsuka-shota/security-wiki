@@ -7,6 +7,42 @@ tags: ["glossary"]
 ## OSI参照モデル
 通信機能を物理層・データリンク層・ネットワーク層・トランスポート層・セッション層・プレゼンテーション層・アプリケーション層の7階層に分けたモデル。各層が隣接する層とだけインターフェースを持つように設計されているため、ある層の実装を変更しても他の層に影響を与えにくく、プロトコルの設計やトラブルシューティングを体系的に行える。障害調査の際に「どの層で問題が起きているか」を切り分ける考え方の土台にもなる。実務ではTCP/IPの4階層モデルと対応付けて語られることが多く、例えばL2はデータリンク層、L3はネットワーク層の機器を指す略称として使われる。
 
+<figure>
+<svg viewBox="0 0 420 330" role="img" aria-label="OSI参照モデルの図解: 物理層からアプリケーション層までの7階層が積み重なった構造" style="max-width:100%;height:auto;">
+  <g font-size="12" fill="currentColor">
+    <rect x="10" y="10" width="400" height="40" fill="none" stroke="currentColor" stroke-width="1.5"/>
+    <text x="30" y="35" font-size="13">7</text>
+    <text x="215" y="35" text-anchor="middle">アプリケーション層</text>
+
+    <rect x="10" y="50" width="400" height="40" fill="none" stroke="currentColor" stroke-width="1.5"/>
+    <text x="30" y="75" font-size="13">6</text>
+    <text x="215" y="75" text-anchor="middle">プレゼンテーション層</text>
+
+    <rect x="10" y="90" width="400" height="40" fill="none" stroke="currentColor" stroke-width="1.5"/>
+    <text x="30" y="115" font-size="13">5</text>
+    <text x="215" y="115" text-anchor="middle">セッション層</text>
+
+    <rect x="10" y="130" width="400" height="40" fill="none" stroke="currentColor" stroke-width="1.5"/>
+    <text x="30" y="155" font-size="13">4</text>
+    <text x="215" y="155" text-anchor="middle">トランスポート層(TCP/UDP)</text>
+
+    <rect x="10" y="170" width="400" height="40" fill="none" stroke="currentColor" stroke-width="1.5"/>
+    <text x="30" y="195" font-size="13">3</text>
+    <text x="215" y="195" text-anchor="middle">ネットワーク層(IP)</text>
+
+    <rect x="10" y="210" width="400" height="40" stroke-width="1.5" style="stroke:var(--secondary)" fill="none"/>
+    <text x="30" y="235" font-size="13" style="fill:var(--secondary)">2</text>
+    <text x="215" y="235" text-anchor="middle" style="fill:var(--secondary)">データリンク層(ARP/MAC) = L2</text>
+
+    <rect x="10" y="250" width="400" height="40" fill="none" stroke="currentColor" stroke-width="1.5"/>
+    <text x="30" y="275" font-size="13">1</text>
+    <text x="215" y="275" text-anchor="middle">物理層</text>
+  </g>
+  <text x="215" y="305" text-anchor="middle" font-size="10" fill="currentColor">※L2=データリンク層、L3=ネットワーク層という略称がよく使われる</text>
+</svg>
+<figcaption>7階層は隣接する層とだけやり取りするため、ある層(例: データリンク層のARP)の問題は他の層に影響を与えずに切り分けられる。</figcaption>
+</figure>
+
 ## TCP/IP
 インターネットの基盤となるプロトコル群の総称。TCPはコネクション型で、送達確認や再送制御によって信頼性のあるデータ転送を実現し、IPはパケットに宛先情報を付与してネットワーク間のルーティングを担う。この2つに加えてUDP、ICMP、ARPなども含めて「TCP/IPプロトコルスイート」と呼ばれることが多い。OSI参照モデルが理論的な7階層モデルであるのに対し、TCP/IPは実際のインターネットで使われている実装寄りの階層モデルという位置付けになる。
 
@@ -20,6 +56,39 @@ IPアドレスからMACアドレスを解決するプロトコル。同一LAN内
 偽のARP応答を送ることで、通信相手に攻撃者自身のMACアドレスを本来の宛先であるかのように誤認させる攻撃。例えば攻撃者が「自分のMACアドレスがデフォルトゲートウェイのものだ」という偽のARP応答を周辺のホストに送り続けると、被害者のパケットはすべて攻撃者経由で転送されるようになる。これにより通信内容の盗聴・改ざんが可能になり、中間者攻撃(MITM)の典型的な足がかりとして使われる。Bettercapやettercapといったツールがこの攻撃の実行によく使われ、対策としてはARPテーブルの静的登録や、スイッチ側でのダイナミックARPインスペクションなどが挙げられる。
 **前提条件**: ARPはブロードキャストドメイン内(同一LAN・同一セグメント)でのみ使われるプロトコルのため、攻撃者は被害者と同じL2セグメントに接続している必要がある。ルータを挟んだ別のネットワークから、インターネット経由で直接ARPスプーフィングを行うことはできない。
 
+<figure>
+<svg viewBox="0 0 640 260" role="img" aria-label="ARPスプーフィングの図解: 攻撃者が偽のARP応答でゲートウェイになりすまし、被害者の通信を自分経由に転送させる" style="max-width:100%;height:auto;">
+  <defs>
+    <marker id="arrow-arp" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="currentColor"/>
+    </marker>
+  </defs>
+  <rect x="20" y="20" width="140" height="50" fill="none" stroke="currentColor" stroke-width="1.5"/>
+  <text x="90" y="50" text-anchor="middle" font-size="12" fill="currentColor">被害者PC</text>
+
+  <rect x="470" y="20" width="150" height="50" fill="none" stroke="currentColor" stroke-width="1.5"/>
+  <text x="545" y="50" text-anchor="middle" font-size="12" fill="currentColor">本来のゲートウェイ</text>
+
+  <rect x="240" y="190" width="160" height="50" fill="none" stroke="currentColor" stroke-width="1.5"/>
+  <text x="320" y="220" text-anchor="middle" font-size="12" fill="currentColor">攻撃者</text>
+
+  <line x1="240" y1="200" x2="155" y2="70" stroke-width="1.5" marker-end="url(#arrow-arp)" style="stroke:var(--secondary)"/>
+  <text x="130" y="140" text-anchor="middle" font-size="10" style="fill:var(--secondary)">① 偽ARP応答</text>
+  <text x="130" y="154" text-anchor="middle" font-size="10" style="fill:var(--secondary)">「ゲートウェイのIPは自分のMAC」</text>
+
+  <line x1="90" y1="70" x2="260" y2="195" stroke-width="1.5" marker-end="url(#arrow-arp)" style="stroke:var(--secondary)"/>
+  <text x="210" y="105" text-anchor="middle" font-size="10" style="fill:var(--secondary)">② 気づかず全通信を送信</text>
+
+  <line x1="380" y1="195" x2="530" y2="72" stroke="currentColor" stroke-width="1.5" marker-end="url(#arrow-arp)"/>
+  <text x="500" y="140" text-anchor="middle" font-size="10" fill="currentColor">③ そのまま中継</text>
+  <text x="500" y="154" text-anchor="middle" font-size="10" fill="currentColor">(盗聴・改ざん可能)</text>
+
+  <line x1="160" y1="35" x2="468" y2="35" stroke="currentColor" stroke-width="1" stroke-dasharray="3 3"/>
+  <text x="320" y="25" text-anchor="middle" font-size="10" fill="currentColor">本来の直接通信(攻撃前)</text>
+</svg>
+<figcaption>攻撃者は偽のARP応答でゲートウェイになりすまし、被害者の通信を自分経由に迂回させる。被害者は本来のゲートウェイと直接話しているつもりのまま、実際には攻撃者が内容を見られる状態になる。</figcaption>
+</figure>
+
 ## CIDR
 IPアドレスのネットワーク部とホスト部の境界を、プレフィックス長(例: 192.168.1.0/24)で表記する方式。従来のクラスA/B/Cのようにアドレス空間を固定長で区切る方式では無駄が多かったため、任意のビット長で区切れるCIDRによって、必要なホスト数に応じて柔軟にアドレスブロックを割り当てられるようになった。ルーティングテーブルにおいても、連続する複数のネットワークを1つの経路情報にまとめる「集約(サマリ化)」に使われ、経路情報の肥大化を抑える役割も持つ。
 
@@ -31,6 +100,44 @@ IPアドレスなどのネットワーク設定をクライアントに動的に
 
 ## DNS
 ドメイン名とIPアドレスを相互に変換する名前解決システム。人間が覚えやすいドメイン名(例: example.com)を、コンピュータが通信に使うIPアドレスに変換する役割を持ち、インターネットの利便性を支える基盤技術の1つになっている。問い合わせを受けたキャッシュDNSサーバは、自身に情報がなければルートDNSサーバ、TLD(トップレベルドメイン)の権威DNSサーバ、該当ドメインの権威DNSサーバへと順にたどって最終的な回答を得る階層構造になっており、得られた結果は一定時間キャッシュして同じ問い合わせの負荷を減らす。
+
+<figure>
+<svg viewBox="0 0 640 300" role="img" aria-label="DNS解決の流れの図解: キャッシュDNSサーバがルート、TLD、権威DNSサーバへ順に問い合わせて最終的な回答を得る" style="max-width:100%;height:auto;">
+  <defs>
+    <marker id="arrow-dns" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="currentColor"/>
+    </marker>
+  </defs>
+  <rect x="10" y="220" width="110" height="50" fill="none" stroke="currentColor" stroke-width="1.5"/>
+  <text x="65" y="250" text-anchor="middle" font-size="12" fill="currentColor">クライアント</text>
+
+  <rect x="190" y="220" width="140" height="50" fill="none" stroke="currentColor" stroke-width="1.5"/>
+  <text x="260" y="250" text-anchor="middle" font-size="12" fill="currentColor">キャッシュDNS</text>
+
+  <rect x="440" y="10" width="170" height="40" fill="none" stroke="currentColor" stroke-width="1.5"/>
+  <text x="525" y="35" text-anchor="middle" font-size="12" fill="currentColor">ルートDNSサーバ</text>
+
+  <rect x="440" y="90" width="170" height="40" fill="none" stroke="currentColor" stroke-width="1.5"/>
+  <text x="525" y="115" text-anchor="middle" font-size="12" fill="currentColor">TLD権威DNSサーバ</text>
+
+  <rect x="440" y="170" width="170" height="40" fill="none" stroke="currentColor" stroke-width="1.5"/>
+  <text x="525" y="195" text-anchor="middle" font-size="12" fill="currentColor">権威DNSサーバ</text>
+
+  <line x1="120" y1="245" x2="188" y2="245" stroke="currentColor" stroke-width="1.5" marker-end="url(#arrow-dns)" marker-start="url(#arrow-dns)"/>
+  <text x="154" y="265" text-anchor="middle" font-size="9" fill="currentColor">①質問 / ⑧回答</text>
+
+  <line x1="330" y1="235" x2="438" y2="30" stroke="currentColor" stroke-width="1.5" marker-end="url(#arrow-dns)" marker-start="url(#arrow-dns)"/>
+  <text x="400" y="130" text-anchor="middle" font-size="9" fill="currentColor" transform="rotate(0)"></text>
+  <text x="345" y="170" text-anchor="start" font-size="9" fill="currentColor">②問合せ/③「.comはTLDへ」</text>
+
+  <line x1="330" y1="245" x2="438" y2="110" stroke-width="1.5" marker-end="url(#arrow-dns)" marker-start="url(#arrow-dns)" style="stroke:var(--secondary)"/>
+  <text x="345" y="200" text-anchor="start" font-size="9" style="fill:var(--secondary)">④問合せ/⑤「権威DNSへ」</text>
+
+  <line x1="330" y1="252" x2="438" y2="192" stroke="currentColor" stroke-width="1.5" marker-end="url(#arrow-dns)" marker-start="url(#arrow-dns)"/>
+  <text x="345" y="228" text-anchor="start" font-size="9" fill="currentColor">⑥問合せ/⑦IPアドレスを回答</text>
+</svg>
+<figcaption>キャッシュDNSサーバは自分に答えがなければ、ルート→TLD→権威DNSサーバの順に「どこに聞けばいいか」をたどり、最後に得た回答をクライアントに返しつつ一定時間キャッシュする。</figcaption>
+</figure>
 
 ## DNSキャッシュポイズニング
 DNSキャッシュサーバに偽の名前解決情報を注入し、利用者を偽サイトへ誘導する攻撃。キャッシュDNSサーバが権威DNSサーバに問い合わせている間のわずかな時間に、攻撃者が偽の応答を正規の応答より先に送り込むことで、本来とは異なるIPアドレスをキャッシュさせてしまう。これに成功すると、そのDNSサーバを利用する多数のユーザーが、正しいドメイン名を入力したにもかかわらず攻撃者の用意した偽サイト(フィッシングサイトなど)に誘導されてしまう。対策としてトランザクションIDのランダム化や、後述のDNSSECによる応答の署名検証が行われる。
@@ -51,11 +158,71 @@ DNS応答に電子署名を付与し、応答の正当性を検証できるよ�
 ## DMZ(非武装地帯)
 社内ネットワークと外部インターネットの間に設ける中間的なネットワーク領域。Webサーバやメールサーバなど外部に公開する必要のあるサーバをこの領域に置くことで、万が一それらのサーバが攻撃を受けて乗っ取られても、内部ネットワーク(社内の業務システムなど)へ直接侵入されるリスクを下げられる。一般的にはファイアウォールを2台使い、「インターネット—DMZ—内部ネットワーク」という3層構成にして、それぞれの境界での通信を個別に制御する設計が広く使われている。
 
+<figure>
+<svg viewBox="0 0 640 160" role="img" aria-label="DMZの図解: インターネットと内部ネットワークの間にDMZを挟み、2台のファイアウォールで通信を制限する" style="max-width:100%;height:auto;">
+  <defs>
+    <marker id="arrow-dmz" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="currentColor"/>
+    </marker>
+  </defs>
+  <rect x="10" y="50" width="120" height="50" fill="none" stroke="currentColor" stroke-width="1.5"/>
+  <text x="70" y="80" text-anchor="middle" font-size="12" fill="currentColor">インターネット</text>
+
+  <line x1="130" y1="75" x2="260" y2="75" stroke="currentColor" stroke-width="1.5" marker-end="url(#arrow-dmz)"/>
+  <rect x="165" y="55" width="30" height="40" fill="none" stroke="currentColor" stroke-width="1.5"/>
+  <text x="180" y="110" text-anchor="middle" font-size="10" fill="currentColor">FW1</text>
+  <text x="180" y="40" text-anchor="middle" font-size="9" fill="currentColor">80/443のみ許可</text>
+
+  <rect x="260" y="50" width="130" height="50" fill="none" stroke="currentColor" stroke-width="1.5"/>
+  <text x="325" y="72" text-anchor="middle" font-size="11" fill="currentColor">DMZ</text>
+  <text x="325" y="88" text-anchor="middle" font-size="10" fill="currentColor">Web/メールサーバ</text>
+
+  <line x1="390" y1="75" x2="520" y2="75" stroke="currentColor" stroke-width="1.5" marker-end="url(#arrow-dmz)"/>
+  <rect x="440" y="55" width="30" height="40" fill="none" stroke="currentColor" stroke-width="1.5"/>
+  <text x="455" y="110" text-anchor="middle" font-size="10" fill="currentColor">FW2</text>
+  <text x="455" y="40" text-anchor="middle" font-size="9" fill="currentColor">必要最小限のみ許可</text>
+
+  <rect x="510" y="50" width="120" height="50" fill="none" stroke="currentColor" stroke-width="1.5"/>
+  <text x="570" y="80" text-anchor="middle" font-size="12" fill="currentColor">内部ネットワーク</text>
+
+  <path d="M70,50 Q320,-30 570,50" fill="none" stroke-width="1.5" stroke-dasharray="4 3" marker-end="url(#arrow-dmz)" style="stroke:var(--secondary)"/>
+  <text x="320" y="12" text-anchor="middle" font-size="10" style="fill:var(--secondary)">✕ 内部への直接到達は許可しない</text>
+</svg>
+<figcaption>DMZにあるサーバが乗っ取られても、FW2が内部ネットワークへの直接アクセスを遮断しているため、社内システムまでは侵入されにくい。</figcaption>
+</figure>
+
 ## プロキシ / リバースプロキシ
 プロキシ(フォワードプロキシ)はクライアントの代理として外部と通信する仕組みで、組織内の端末がインターネットに直接出ず、プロキシサーバを経由することでアクセスログの一元管理やコンテンツフィルタリング、キャッシュによる高速化などを実現する。リバースプロキシはこれと逆に、サーバ側に立って外部からの要求を受け取り、内部の複数のサーバへ振り分ける役割を持ち、負荷分散(ロードバランシング)やSSL/TLS処理の集約、内部サーバ構成の秘匿といった目的で使われる。Nginxなどがリバースプロキシの実装としてよく利用される。
 
 ## VPN
 インターネットなどの共有ネットワーク上に、暗号化などで保護された仮想的な専用通信路(トンネル)を構築する技術。拠点間を専用線で結ぶと高コストになるため、既存のインターネット回線上に暗号化されたトンネルを張ることで、専用線に近い安全性を低コストで実現できる。リモートワークにおいて社員が自宅から社内ネットワークに安全に接続する用途や、拠点間のネットワークを結ぶ用途で広く使われ、実装方式としてIPsecを使うものやSSL/TLSを使うもの(SSL-VPN)などがある。
+
+<figure>
+<svg viewBox="0 0 640 160" role="img" aria-label="VPNの図解: クライアントとVPNゲートウェイの間だけがインターネット上で暗号化トンネルで保護され、ゲートウェイから先の社内ネットワークは平文のまま" style="max-width:100%;height:auto;">
+  <defs>
+    <marker id="arrow-vpn" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="currentColor"/>
+    </marker>
+  </defs>
+  <rect x="10" y="55" width="100" height="50" fill="none" stroke="currentColor" stroke-width="1.5"/>
+  <text x="60" y="85" text-anchor="middle" font-size="12" fill="currentColor">クライアント</text>
+
+  <rect x="190" y="10" width="200" height="140" fill="none" stroke="currentColor" stroke-width="1" stroke-dasharray="3 3"/>
+  <text x="290" y="28" text-anchor="middle" font-size="10" fill="currentColor">インターネット(公衆網)</text>
+
+  <line x1="110" y1="80" x2="470" y2="80" stroke-width="4" marker-end="url(#arrow-vpn)" style="stroke:var(--secondary)"/>
+  <text x="290" y="68" text-anchor="middle" font-size="11" style="fill:var(--secondary)">暗号化トンネル</text>
+
+  <rect x="470" y="55" width="130" height="50" fill="none" stroke="currentColor" stroke-width="1.5"/>
+  <text x="535" y="78" text-anchor="middle" font-size="11" fill="currentColor">VPN</text>
+  <text x="535" y="94" text-anchor="middle" font-size="11" fill="currentColor">ゲートウェイ</text>
+
+  <line x1="600" y1="80" x2="630" y2="80" stroke="currentColor" stroke-width="1.5" marker-end="url(#arrow-vpn)"/>
+  <text x="615" y="130" text-anchor="middle" font-size="9" fill="currentColor">社内</text>
+  <text x="615" y="142" text-anchor="middle" font-size="9" fill="currentColor">(平文で到達)</text>
+</svg>
+<figcaption>暗号化で保護されるのはクライアントからVPNゲートウェイまでの区間だけで、そこから先の社内ネットワーク内部は通常、信頼された平文の通信になる。</figcaption>
+</figure>
 
 ## IPsec
 IPパケット単位で認証・暗号化を行うプロトコル群。VPNの実装によく使われ、改ざん検知と送信元認証を行うAH(Authentication Header)と、ペイロードの暗号化までを行うESP(Encapsulating Security Payload)という2つの主要プロトコルを持つ。実際の通信前には、鍵交換や認証方式を取り決めるIKE(Internet Key Exchange)というプロトコルでセキュリティアソシエーション(SA)を確立する必要があり、この一連の仕組み全体を指してIPsecと呼ぶ。

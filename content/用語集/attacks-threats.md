@@ -7,6 +7,38 @@ tags: ["glossary"]
 ## SQLインジェクション
 Webアプリケーションの入力値を悪用し、不正なSQL文を実行させる攻撃。ユーザーが入力した値をそのまま組み立ててSQL文を実行しているアプリケーションに対し、入力欄に `' OR '1'='1` のような特殊な文字列を混入させることで、元のSQL文の意味を書き換えてしまう。認証を回避してログインする、非公開のデータベースの内容を丸ごと窃取する、データを改ざん・削除するなど被害は大きく、Webアプリケーションの脆弱性としては最も古典的かつ現在でも頻発するものの一つ。対策としては、SQL文の組み立てとパラメータの値を分離するプリペアドステートメント(パラメータ化クエリ)の利用が基本となる。
 
+<figure>
+<svg viewBox="0 0 680 220" role="img" aria-label="SQLインジェクションの図解: 入力値をそのまま連結するコードに悪意ある文字列を渡すと、SQL文の意味そのものが書き換わる" style="max-width:100%;height:auto;">
+  <defs>
+    <marker id="arrow-sqli" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="currentColor"/>
+    </marker>
+  </defs>
+  <rect x="10" y="20" width="160" height="40" fill="none" stroke="currentColor" stroke-width="1.5"/>
+  <text x="90" y="45" text-anchor="middle" font-size="11" fill="currentColor">入力: alice</text>
+
+  <line x1="170" y1="40" x2="248" y2="40" stroke="currentColor" stroke-width="1.5" marker-end="url(#arrow-sqli)"/>
+
+  <rect x="250" y="20" width="420" height="40" fill="none" stroke="currentColor" stroke-width="1.5"/>
+  <text x="460" y="45" text-anchor="middle" font-size="11" fill="currentColor">WHERE name='alice' → aliceの行だけ返る</text>
+
+  <rect x="10" y="100" width="160" height="50" stroke-width="1.5" style="stroke:var(--secondary)" fill="none"/>
+  <text x="90" y="122" text-anchor="middle" font-size="10" style="fill:var(--secondary)">入力:</text>
+  <text x="90" y="138" text-anchor="middle" font-size="10" style="fill:var(--secondary)">' OR '1'='1</text>
+
+  <line x1="170" y1="125" x2="248" y2="125" stroke-width="1.5" marker-end="url(#arrow-sqli)" style="stroke:var(--secondary)"/>
+  <text x="210" y="112" text-anchor="middle" font-size="9" fill="currentColor">同じ連結コード</text>
+
+  <rect x="250" y="100" width="420" height="50" stroke-width="1.5" style="stroke:var(--secondary)" fill="none"/>
+  <text x="460" y="120" text-anchor="middle" font-size="10" style="fill:var(--secondary)">WHERE name='' OR '1'='1'</text>
+  <text x="460" y="138" text-anchor="middle" font-size="10" style="fill:var(--secondary)">→ 常に真になり全行が返る</text>
+
+  <line x1="460" y1="150" x2="460" y2="190" stroke-width="1.5" marker-end="url(#arrow-sqli)" style="stroke:var(--secondary)"/>
+  <text x="460" y="205" text-anchor="middle" font-size="10" style="fill:var(--secondary)">認証回避・全データ窃取につながる</text>
+</svg>
+<figcaption>正常な値も悪意ある値も、同じ「文字列をそのまま連結する」コードを通る。入力に応じてSQL文の構造自体が変わってしまう点が脆弱性の本質。</figcaption>
+</figure>
+
 ## クロスサイトスクリプティング(XSS)
 Webページに悪意あるスクリプトを埋め込み、閲覧者のブラウザ上で実行させる攻撃。攻撃者が仕込んだスクリプトが被害者のブラウザ上で実行されるため、セッションIDの盗取(セッションハイジャックへの悪用)や、偽のログイン画面の表示によるフィッシングなどに利用される。攻撃用スクリプトが含まれたリンクをクリックさせた時だけ発動する反射型、サーバに保存された投稿内容などを経由して他の利用者にも影響が及ぶ格納型、JavaScriptがDOMを操作する際の処理に起因するDOM Based型に分類され、対策としては出力時に特殊文字をエスケープする処理(サニタイズ)が基本となる。
 
@@ -54,6 +86,32 @@ Webページに悪意あるスクリプトを埋め込み、閲覧者のブラ�
 通信を行う二者の間に攻撃者が介在し、通信内容を盗聴・改ざんする攻撃。ARPスプーフィングやDNSスプーフィングによって通信経路そのものを攻撃者経由に乗っ取る方法や、不正なWi-Fiアクセスポイントを設置して接続させる方法などで経路を奪ったうえで、暗号化されていない通信の内容を読み取ったり、暗号化されている場合は偽の証明書を使って復号させたりする。HTTPS化やVPNの利用、証明書の検証を正しく行うことが防御の基本になる。
 **前提条件**: ARPスプーフィングを使う場合は攻撃者が被害者と同一LAN(同一セグメント)に存在している必要があり、不正なWi-Fiアクセスポイントを使う場合は被害者をそのアクセスポイントに接続させる必要がある。いずれの手法でも「通信経路上に攻撃者が入り込める」位置取りが前提となり、インターネット越しに無関係な場所から直接MITMを行うことはできない。
 
+<figure>
+<svg viewBox="0 0 600 200" role="img" aria-label="中間者攻撃の図解: クライアントとサーバは直接通信していると思っているが、実際には攻撃者が間に入って中継している" style="max-width:100%;height:auto;">
+  <defs>
+    <marker id="arrow-mitm" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="currentColor"/>
+    </marker>
+  </defs>
+  <rect x="10" y="10" width="120" height="44" fill="none" stroke="currentColor" stroke-width="1.5"/>
+  <text x="70" y="38" text-anchor="middle" font-size="12" fill="currentColor">クライアント</text>
+
+  <rect x="470" y="10" width="120" height="44" fill="none" stroke="currentColor" stroke-width="1.5"/>
+  <text x="530" y="38" text-anchor="middle" font-size="12" fill="currentColor">サーバ</text>
+
+  <line x1="130" y1="32" x2="468" y2="32" stroke="currentColor" stroke-width="1" stroke-dasharray="3 3" marker-end="url(#arrow-mitm)" marker-start="url(#arrow-mitm)"/>
+  <text x="300" y="20" text-anchor="middle" font-size="10" fill="currentColor">本人たちは直接通信していると思っている</text>
+
+  <rect x="240" y="140" width="120" height="50" stroke-width="1.5" style="stroke:var(--secondary)" fill="none"/>
+  <text x="300" y="170" text-anchor="middle" font-size="12" style="fill:var(--secondary)">攻撃者</text>
+
+  <line x1="70" y1="54" x2="260" y2="145" stroke-width="1.5" marker-end="url(#arrow-mitm)" style="stroke:var(--secondary)"/>
+  <line x1="340" y1="145" x2="530" y2="54" stroke-width="1.5" marker-end="url(#arrow-mitm)" style="stroke:var(--secondary)"/>
+  <text x="300" y="110" text-anchor="middle" font-size="10" style="fill:var(--secondary)">実際の経路: 攻撃者が中継・盗聴・改ざん</text>
+</svg>
+<figcaption>通信経路を乗っ取った攻撃者は、両者に「相手と直接話している」と思わせたまま、内容を盗聴・改ざんできる。防御の基本はHTTPS化と証明書の正しい検証。</figcaption>
+</figure>
+
 ## セッションハイジャック
 他人の有効なセッションID等を盗用・推測し、そのユーザーになりすましてシステムを利用する攻撃。ログイン後にサーバが発行するセッションIDは「ログイン済みであること」を示す鍵のようなものであり、これを前述のXSSや通信の盗聴などで盗まれると、パスワードを知らなくてもそのユーザーとしてシステムを操作できてしまう。対策としては、セッションIDを推測困難な値にする、HTTPS化して通信を暗号化する、ログイン後にセッションIDを再発行する、といった手法が取られる。
 
@@ -83,6 +141,10 @@ Webページに悪意あるスクリプトを埋め込み、閲覧者のブラ�
 侵害した端末(ボット)に対して攻撃者が指令を送り、制御するための外部サーバ。マルウェアに感染した端末は定期的にこのC2サーバに接続して新たな指令を受け取ったり、窃取したデータを送信したりする。ネットワーク監視の観点では、通常の業務通信とは異なる宛先への定期的な通信や、見慣れないドメインへの接続がC2通信の兆候として検知の対象になり、インシデント対応ではC2サーバの通信先(IoC: 痛跡情報)を特定して遮断することが初動対応の鍵となる。
 **前提条件**: 端末が何らかの経路(マルウェア付きメールの実行、脆弱性の悪用など)で既にマルウェアに感染しており、そのマルウェアが外部のC2サーバへ通信できるネットワーク経路(多くはインターネットへの通常の発信方向の接続)を持っていることが前提になる。
 
+## ドメインフロンティング攻撃
+大手クラウド/CDN事業者(CloudFront、Azure CDNなど)が持つ信頼されたドメインを「隠れ蓑」にして、C2通信などの実際の宛先を秘匿する手法。TLSのSNI(どのドメイン向けかを示す部分)には正規の有名ドメインを指定しつつ、暗号化されたHTTPヘッダ内のHostヘッダには実際に接続したい別のバックエンド(攻撃者が管理するCDN上の配信先)を指定することで、通信内容を見ずに宛先ドメインだけで判断するファイアウォールやプロキシのフィルタリングを回避する。CDN側がこのSNIとHostの不一致を許容してリクエストを転送してしまう構成を悪用しており、著名なCDN事業者の多くは現在この手法への対策(SNIとHostの一致チェックなど)を講じている。
+**前提条件**: 悪用するCDN/クラウド事業者が、SNIで示されたドメインとは異なるバックエンドへのリクエスト転送を許容する設定になっていることが前提となる。攻撃者はそのCDN上に自身の配信設定(攻撃用バックエンドへのルーティング)を事前に用意しておく必要がある。
+
 ## ボットネット
 C2サーバの指令で一斉に動作する、侵害済み端末(ボット)の集合体。個々の端末の持ち主は感染に気づいていないことが多く、攻撃者はこれらを遠隔からまとめて操作することで、大規模なDDoS攻撃、スパムメールの大量送信、仮想通貨の不正マイニングといった活動に悪用する。ボットネットの規模(感染端末数)がそのまま攻撃者の「攻撃力」に直結するため、IoT機器のようにセキュリティ対策が手薄な機器が狙われ組み込まれるケースも多い。
 
@@ -109,6 +171,46 @@ C2サーバの指令で一斉に動作する、侵害済み端末(ボット)の�
 
 ## サイバーキルチェーン
 偵察・武器化・配送・攻撃・インストール・C2・目的達成という、標的型攻撃の一連のプロセスを7段階で表したモデル。元は軍事用語の「キルチェーン」をサイバー攻撃に適用したもので、攻撃がこの一連の連鎖(チェーン)として進行するという前提のもと、防御側はどこか1つの段階で攻撃を遮断できれば全体の攻撃を阻止できるという考え方に基づいている。各段階に応じた検知・防御策を整理するためのフレームワークとして、インシデント対応や防御設計の議論でよく参照される。
+
+<figure>
+<svg viewBox="0 0 760 140" role="img" aria-label="サイバーキルチェーンの図解: 偵察から目的達成までの7段階が連鎖し、どこか1段階を遮断できれば攻撃全体を阻止できる" style="max-width:100%;height:auto;">
+  <defs>
+    <marker id="arrow-kc" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="currentColor"/>
+    </marker>
+  </defs>
+  <g font-size="11" fill="currentColor">
+    <rect x="10" y="40" width="90" height="44" fill="none" stroke="currentColor" stroke-width="1.5"/>
+    <text x="55" y="65" text-anchor="middle">①偵察</text>
+    <line x1="100" y1="62" x2="118" y2="62" stroke="currentColor" stroke-width="1.5" marker-end="url(#arrow-kc)"/>
+
+    <rect x="120" y="40" width="90" height="44" fill="none" stroke="currentColor" stroke-width="1.5"/>
+    <text x="165" y="65" text-anchor="middle">②武器化</text>
+    <line x1="210" y1="62" x2="228" y2="62" stroke="currentColor" stroke-width="1.5" marker-end="url(#arrow-kc)"/>
+
+    <rect x="230" y="40" width="90" height="44" fill="none" stroke="currentColor" stroke-width="1.5"/>
+    <text x="275" y="65" text-anchor="middle">③配送</text>
+    <line x1="320" y1="62" x2="338" y2="62" stroke="currentColor" stroke-width="1.5" marker-end="url(#arrow-kc)"/>
+
+    <rect x="340" y="40" width="90" height="44" fill="none" stroke="currentColor" stroke-width="1.5"/>
+    <text x="385" y="65" text-anchor="middle">④攻撃実行</text>
+    <line x1="430" y1="62" x2="448" y2="62" stroke="currentColor" stroke-width="1.5" marker-end="url(#arrow-kc)"/>
+
+    <rect x="450" y="40" width="90" height="44" fill="none" stroke="currentColor" stroke-width="1.5"/>
+    <text x="495" y="65" text-anchor="middle">⑤インストール</text>
+    <line x1="540" y1="62" x2="558" y2="62" stroke="currentColor" stroke-width="1.5" marker-end="url(#arrow-kc)"/>
+
+    <rect x="560" y="40" width="90" height="44" fill="none" stroke="currentColor" stroke-width="1.5"/>
+    <text x="605" y="65" text-anchor="middle">⑥C2</text>
+    <line x1="650" y1="62" x2="668" y2="62" stroke="currentColor" stroke-width="1.5" marker-end="url(#arrow-kc)"/>
+
+    <rect x="670" y="40" width="80" height="44" stroke-width="1.5" style="stroke:var(--secondary)" fill="none"/>
+    <text x="710" y="65" text-anchor="middle" style="fill:var(--secondary)">⑦目的達成</text>
+  </g>
+  <text x="380" y="110" text-anchor="middle" font-size="10" fill="currentColor">防御側はどこか1段階を遮断できれば、以降の段階全体を阻止できる</text>
+</svg>
+<figcaption>標的型攻撃を7段階の連鎖としてモデル化したもの。各段階に応じた検知・防御策を整理する枠組みとして使われる。</figcaption>
+</figure>
 
 ## MITRE ATT&CK
 攻撃者の戦術(Tactics)・技術(Techniques)・手順(Procedures)を体系的に整理したナレッジベース。実際に観測された攻撃事例をもとに、「初期アクセス」「実行」「権限昇格」「水平展開」といった戦術ごとに、具体的にどのような技術が使われたかを網羅的にマトリクス形式で整理しており、脅威分析、レッドチーム演習の計画、防御側の検知ルール整備(どの技術をどう検知するか)など幅広い用途で業界標準的に利用されている。

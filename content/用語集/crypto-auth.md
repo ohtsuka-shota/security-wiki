@@ -10,6 +10,46 @@ tags: ["glossary"]
 ## 公開鍵暗号方式
 暗号化に公開鍵、復号に秘密鍵という異なる鍵を使う方式。公開鍵は誰に知られても問題ない一方、秘密鍵は所有者だけが厳重に保管するという非対称な関係を利用することで、事前に安全な経路で鍵を共有しなくても暗号通信を開始できる「鍵配送問題」の解決策になっている。処理は共通鍵方式より計算量が多く低速なため、実際の通信では公開鍵暗号で共通鍵を安全にやり取りし、本体のデータは共通鍵で暗号化するハイブリッド方式が一般的。代表例はRSAや楕円曲線暗号で、デジタル署名にも応用される。
 
+<figure>
+<svg viewBox="0 0 740 210" role="img" aria-label="公開鍵暗号方式の図解: 送信者は受信者の公開鍵で暗号化し、受信者は自分だけが持つ秘密鍵で復号する" style="max-width:100%;height:auto;">
+  <defs>
+    <marker id="arrow-pubkey" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="currentColor"/>
+    </marker>
+  </defs>
+  <rect x="10" y="70" width="110" height="60" fill="none" stroke="currentColor" stroke-width="1.5"/>
+  <text x="65" y="105" text-anchor="middle" font-size="13" fill="currentColor">送信者</text>
+
+  <rect x="180" y="70" width="130" height="60" fill="none" stroke="currentColor" stroke-width="1.5"/>
+  <text x="245" y="105" text-anchor="middle" font-size="13" fill="currentColor">暗号化</text>
+
+  <rect x="390" y="70" width="130" height="60" fill="none" stroke="currentColor" stroke-width="1.5"/>
+  <text x="455" y="105" text-anchor="middle" font-size="13" fill="currentColor">復号</text>
+
+  <rect x="600" y="70" width="110" height="60" fill="none" stroke="currentColor" stroke-width="1.5"/>
+  <text x="655" y="105" text-anchor="middle" font-size="13" fill="currentColor">受信者</text>
+
+  <line x1="120" y1="100" x2="178" y2="100" stroke="currentColor" stroke-width="1.5" marker-end="url(#arrow-pubkey)"/>
+  <text x="149" y="92" text-anchor="middle" font-size="11" fill="currentColor">平文</text>
+
+  <line x1="310" y1="100" x2="388" y2="100" stroke-width="1.5" marker-end="url(#arrow-pubkey)" style="stroke:var(--secondary)"/>
+  <text x="349" y="88" text-anchor="middle" font-size="11" style="fill:var(--secondary)">暗号文</text>
+  <text x="349" y="124" text-anchor="middle" font-size="10" style="fill:var(--secondary)">(盗聴されても解読不可)</text>
+
+  <line x1="520" y1="100" x2="598" y2="100" stroke="currentColor" stroke-width="1.5" marker-end="url(#arrow-pubkey)"/>
+  <text x="559" y="92" text-anchor="middle" font-size="11" fill="currentColor">平文</text>
+
+  <rect x="180" y="8" width="130" height="38" fill="none" stroke="currentColor" stroke-width="1.5"/>
+  <text x="245" y="31" text-anchor="middle" font-size="11" fill="currentColor">受信者の公開鍵</text>
+  <line x1="245" y1="46" x2="245" y2="68" stroke="currentColor" stroke-width="1.5" marker-end="url(#arrow-pubkey)"/>
+
+  <rect x="390" y="162" width="130" height="38" stroke-dasharray="4 3" fill="none" stroke="currentColor" stroke-width="1.5"/>
+  <text x="455" y="185" text-anchor="middle" font-size="11" fill="currentColor">受信者の秘密鍵(非公開)</text>
+  <line x1="455" y1="162" x2="455" y2="132" stroke="currentColor" stroke-width="1.5" marker-end="url(#arrow-pubkey)"/>
+</svg>
+<figcaption>暗号化には誰でも使える「受信者の公開鍵」を使い、復号には受信者だけが持つ「秘密鍵」を使う。この非対称性により、事前に鍵を安全に共有しなくても暗号通信を始められる。</figcaption>
+</figure>
+
 ## AES
 現在標準的に使われているブロック暗号。鍵長128/192/256ビットに対応し、安全性と処理速度のバランスが良いため、Wi-FiのWPA2/WPA3、HTTPS、ディスク暗号化など非常に広範囲で利用されている。前身であるDESが鍵長56ビットと短く総当たり攻撃に対して脆弱になったことを受けて、米国NIST(国立標準技術研究所)の公募で選定された暗号方式であり、現時点では実用上の計算資源で解読される見込みがない安全な暗号として広く信頼されている。
 
@@ -40,8 +80,84 @@ tags: ["glossary"]
 ## デジタル署名
 秘密鍵でデータ(通常はそのハッシュ値)に署名し、対応する公開鍵で検証することで、データの作成者の真正性(なりすましでないこと)と非改ざん性(途中で書き換えられていないこと)を保証する仕組み。公開鍵暗号の「秘密鍵で暗号化したものは対応する公開鍵でしか正しく復号できない」という性質を逆方向に使ったもので、ソフトウェアの配布元の確認、電子契約、証明書の発行(認証局が証明書に対して行う署名)など幅広い場面で使われている。
 
+<figure>
+<svg viewBox="0 0 780 210" role="img" aria-label="デジタル署名の図解: 署名者は秘密鍵で署名を作成し、検証者は署名者の公開鍵でそれを検証する" style="max-width:100%;height:auto;">
+  <defs>
+    <marker id="arrow-sig" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="currentColor"/>
+    </marker>
+  </defs>
+  <rect x="10" y="70" width="110" height="60" fill="none" stroke="currentColor" stroke-width="1.5"/>
+  <text x="65" y="105" text-anchor="middle" font-size="13" fill="currentColor">署名者</text>
+
+  <rect x="180" y="70" width="170" height="60" fill="none" stroke="currentColor" stroke-width="1.5"/>
+  <text x="265" y="100" text-anchor="middle" font-size="12" fill="currentColor">ハッシュ化して</text>
+  <text x="265" y="116" text-anchor="middle" font-size="12" fill="currentColor">秘密鍵で署名</text>
+
+  <rect x="450" y="70" width="170" height="60" fill="none" stroke="currentColor" stroke-width="1.5"/>
+  <text x="535" y="100" text-anchor="middle" font-size="12" fill="currentColor">公開鍵で</text>
+  <text x="535" y="116" text-anchor="middle" font-size="12" fill="currentColor">署名を検証</text>
+
+  <rect x="660" y="70" width="110" height="60" fill="none" stroke="currentColor" stroke-width="1.5"/>
+  <text x="715" y="105" text-anchor="middle" font-size="13" fill="currentColor">検証者</text>
+
+  <line x1="120" y1="100" x2="178" y2="100" stroke="currentColor" stroke-width="1.5" marker-end="url(#arrow-sig)"/>
+  <text x="149" y="92" text-anchor="middle" font-size="10" fill="currentColor">メッセージ</text>
+
+  <line x1="350" y1="100" x2="448" y2="100" stroke-width="1.5" marker-end="url(#arrow-sig)" style="stroke:var(--secondary)"/>
+  <text x="399" y="88" text-anchor="middle" font-size="10" style="fill:var(--secondary)">メッセージ+署名</text>
+
+  <line x1="620" y1="100" x2="658" y2="100" stroke="currentColor" stroke-width="1.5" marker-end="url(#arrow-sig)"/>
+  <text x="639" y="88" text-anchor="middle" font-size="9" fill="currentColor">OK/NG</text>
+
+  <rect x="180" y="8" width="170" height="38" fill="none" stroke="currentColor" stroke-width="1.5"/>
+  <text x="265" y="31" text-anchor="middle" font-size="11" fill="currentColor">署名者の秘密鍵</text>
+  <line x1="265" y1="46" x2="265" y2="68" stroke="currentColor" stroke-width="1.5" marker-end="url(#arrow-sig)"/>
+
+  <rect x="450" y="8" width="170" height="38" fill="none" stroke="currentColor" stroke-width="1.5"/>
+  <text x="535" y="31" text-anchor="middle" font-size="11" fill="currentColor">署名者の公開鍵</text>
+  <line x1="535" y1="46" x2="535" y2="68" stroke="currentColor" stroke-width="1.5" marker-end="url(#arrow-sig)"/>
+</svg>
+<figcaption>暗号化とは鍵の使い方が逆になる点がポイント: 署名には署名者だけが持つ秘密鍵を使い、検証には誰でも使える署名者の公開鍵を使う。検証に成功すれば「本人が作成し、改ざんされていない」ことが確認できる。</figcaption>
+</figure>
+
 ## PKI(公開鍵基盤)
 公開鍵証明書の発行・管理・検証の仕組み全体を指す概念。「この公開鍵は本当にこの組織・人物のものである」という結び付けを保証するために、後述の認証局(CA)が身元確認を行って証明書を発行し、証明書失効リスト(CRL)やOCSPで失効状況を確認できるようにする、という一連の仕組みを総合してPKIと呼ぶ。HTTPSの通信先が正しいサーバであることを確認する仕組みも、このPKIの上に成り立っている。
+
+<figure>
+<svg viewBox="0 0 640 260" role="img" aria-label="PKI証明書チェーンの図解: ルートCAから中間CA、サーバ証明書へと署名が連鎖し、検証はその逆順にルートまでたどる" style="max-width:100%;height:auto;">
+  <defs>
+    <marker id="arrow-pki" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="currentColor"/>
+    </marker>
+  </defs>
+  <rect x="20" y="20" width="220" height="50" fill="none" stroke="currentColor" stroke-width="1.5"/>
+  <text x="130" y="50" text-anchor="middle" font-size="12" fill="currentColor">ブラウザ/OSの信頼ストア</text>
+
+  <line x1="80" y1="70" x2="80" y2="108" stroke="currentColor" stroke-width="1.5" marker-end="url(#arrow-pki)"/>
+  <text x="130" y="95" text-anchor="start" font-size="10" fill="currentColor">事前に信頼(組み込み)</text>
+
+  <rect x="20" y="110" width="160" height="50" fill="none" stroke="currentColor" stroke-width="1.5"/>
+  <text x="100" y="140" text-anchor="middle" font-size="12" fill="currentColor">ルートCA</text>
+
+  <line x1="180" y1="135" x2="238" y2="135" stroke="currentColor" stroke-width="1.5" marker-end="url(#arrow-pki)"/>
+  <text x="209" y="127" text-anchor="middle" font-size="10" fill="currentColor">署名</text>
+
+  <rect x="240" y="110" width="160" height="50" fill="none" stroke="currentColor" stroke-width="1.5"/>
+  <text x="320" y="140" text-anchor="middle" font-size="12" fill="currentColor">中間CA</text>
+
+  <line x1="400" y1="135" x2="458" y2="135" stroke="currentColor" stroke-width="1.5" marker-end="url(#arrow-pki)"/>
+  <text x="429" y="127" text-anchor="middle" font-size="10" fill="currentColor">署名</text>
+
+  <rect x="460" y="110" width="160" height="50" fill="none" stroke="currentColor" stroke-width="1.5"/>
+  <text x="540" y="140" text-anchor="middle" font-size="12" fill="currentColor">サーバ証明書</text>
+
+  <line x1="460" y1="185" x2="402" y2="185" stroke-width="1.5" marker-end="url(#arrow-pki)" style="stroke:var(--secondary)"/>
+  <line x1="240" y1="185" x2="182" y2="185" stroke-width="1.5" marker-end="url(#arrow-pki)" style="stroke:var(--secondary)"/>
+  <text x="320" y="202" text-anchor="middle" font-size="10" style="fill:var(--secondary)">検証はこの順でルートまでたどる</text>
+</svg>
+<figcaption>証明書は「ルートCA→中間CA→サーバ証明書」の順に署名で連鎖する。ブラウザは逆方向に、サーバ証明書から署名をたどってあらかじめ信頼しているルートCAに到達できるかを検証する。</figcaption>
+</figure>
 
 ## 認証局(CA)
 公開鍵証明書を発行し、申請者(ドメインや組織)の身元を保証する機関。ブラウザやOSにはあらかじめ主要な認証局のルート証明書が組み込まれており、この「信頼の起点」から発行された証明書の鎖(証明書チェーン)をたどって検証できる証明書は、ブラウザから「信頼できる」と判断される。認証局自体が不正に証明書を発行したり侵害されたりすると、PKI全体の信頼性が揺らぐため、認証局の運用には厳格な審査・監査基準が設けられている。
@@ -54,6 +170,37 @@ tags: ["glossary"]
 
 ## TLSハンドシェイク
 クライアントとサーバが暗号方式(暗号スイート)を決定し、鍵交換と相互認証(通常はサーバ認証のみ)を行う一連の手続き。おおまかには、クライアントが対応可能な暗号方式一覧を提示し、サーバが使用する方式と自身の証明書を返し、証明書の検証後にDiffie-Hellman鍵交換などで共通鍵(セッション鍵)を安全に生成する、という流れで進む。TLS 1.3ではこのやり取りに必要な往復回数が削減され、TLS 1.2までと比べて接続開始までの時間が短縮されている。
+
+<figure>
+<svg viewBox="0 0 700 270" role="img" aria-label="TLSハンドシェイクの図解: クライアントとサーバがClientHello、ServerHello+証明書、鍵交換、Finishedの順にやり取りする" style="max-width:100%;height:auto;">
+  <defs>
+    <marker id="arrow-tls" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="currentColor"/>
+    </marker>
+  </defs>
+  <rect x="90" y="10" width="120" height="36" fill="none" stroke="currentColor" stroke-width="1.5"/>
+  <text x="150" y="33" text-anchor="middle" font-size="12" fill="currentColor">クライアント</text>
+  <line x1="150" y1="46" x2="150" y2="250" stroke="currentColor" stroke-width="1" stroke-dasharray="2 3"/>
+
+  <rect x="490" y="10" width="120" height="36" fill="none" stroke="currentColor" stroke-width="1.5"/>
+  <text x="550" y="33" text-anchor="middle" font-size="12" fill="currentColor">サーバ</text>
+  <line x1="550" y1="46" x2="550" y2="250" stroke="currentColor" stroke-width="1" stroke-dasharray="2 3"/>
+
+  <line x1="150" y1="80" x2="548" y2="80" stroke="currentColor" stroke-width="1.5" marker-end="url(#arrow-tls)"/>
+  <text x="350" y="72" text-anchor="middle" font-size="11" fill="currentColor">① ClientHello(対応可能な暗号方式一覧)</text>
+
+  <line x1="550" y1="120" x2="152" y2="120" stroke="currentColor" stroke-width="1.5" marker-end="url(#arrow-tls)"/>
+  <text x="350" y="112" text-anchor="middle" font-size="11" fill="currentColor">② ServerHello + サーバ証明書</text>
+
+  <line x1="150" y1="160" x2="548" y2="160" stroke="currentColor" stroke-width="1.5" marker-end="url(#arrow-tls)"/>
+  <text x="350" y="152" text-anchor="middle" font-size="11" fill="currentColor">③ 証明書を検証 → 鍵交換用の情報を送付</text>
+
+  <line x1="150" y1="200" x2="548" y2="200" stroke-width="1.5" marker-end="url(#arrow-tls)" style="stroke:var(--secondary)"/>
+  <line x1="550" y1="215" x2="152" y2="215" stroke-width="1.5" marker-end="url(#arrow-tls)" style="stroke:var(--secondary)"/>
+  <text x="350" y="238" text-anchor="middle" font-size="11" style="fill:var(--secondary)">④ Finished(以降は生成した共通鍵で暗号化通信)</text>
+</svg>
+<figcaption>証明書の検証後にDiffie-Hellman鍵交換などで共通鍵(セッション鍵)を安全に生成し、④以降はその共通鍵による暗号化通信に切り替わる。TLS 1.3ではこの往復回数がさらに削減されている。</figcaption>
+</figure>
 
 ## Diffie-Hellman鍵交換
 事前に秘密情報を共有せずに、公開情報のやり取りだけで通信する両者が共通の鍵を安全に生成できるアルゴリズム。双方が秘密に保持する値と公開して交換する値を使った計算によって、第三者が通信を傍受しても同じ鍵を計算することが困難(離散対数問題の困難性に基づく)という性質を利用しており、TLSなどのセッション鍵生成の基盤技術になっている。楕円曲線を使った改良版はECDH(楕円曲線Diffie-Hellman)と呼ばれる。
