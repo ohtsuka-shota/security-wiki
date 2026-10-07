@@ -16,23 +16,17 @@ Webアプリケーションの入力値を悪用し、不正なSQL文を実行�
   </defs>
   <rect x="10" y="20" width="160" height="40" fill="none" stroke="currentColor" stroke-width="1.5"/>
   <text x="90" y="45" text-anchor="middle" font-size="11" fill="currentColor">入力: alice</text>
-
   <line x1="170" y1="40" x2="248" y2="40" stroke="currentColor" stroke-width="1.5" marker-end="url(#arrow-sqli)"/>
-
   <rect x="250" y="20" width="420" height="40" fill="none" stroke="currentColor" stroke-width="1.5"/>
   <text x="460" y="45" text-anchor="middle" font-size="11" fill="currentColor">WHERE name='alice' → aliceの行だけ返る</text>
-
   <rect x="10" y="100" width="160" height="50" stroke-width="1.5" style="stroke:var(--secondary)" fill="none"/>
   <text x="90" y="122" text-anchor="middle" font-size="10" style="fill:var(--secondary)">入力:</text>
   <text x="90" y="138" text-anchor="middle" font-size="10" style="fill:var(--secondary)">' OR '1'='1</text>
-
   <line x1="170" y1="125" x2="248" y2="125" stroke-width="1.5" marker-end="url(#arrow-sqli)" style="stroke:var(--secondary)"/>
   <text x="210" y="112" text-anchor="middle" font-size="9" fill="currentColor">同じ連結コード</text>
-
   <rect x="250" y="100" width="420" height="50" stroke-width="1.5" style="stroke:var(--secondary)" fill="none"/>
   <text x="460" y="120" text-anchor="middle" font-size="10" style="fill:var(--secondary)">WHERE name='' OR '1'='1'</text>
   <text x="460" y="138" text-anchor="middle" font-size="10" style="fill:var(--secondary)">→ 常に真になり全行が返る</text>
-
   <line x1="460" y1="150" x2="460" y2="190" stroke-width="1.5" marker-end="url(#arrow-sqli)" style="stroke:var(--secondary)"/>
   <text x="460" y="205" text-anchor="middle" font-size="10" style="fill:var(--secondary)">認証回避・全データ窃取につながる</text>
 </svg>
@@ -95,16 +89,12 @@ Webページに悪意あるスクリプトを埋め込み、閲覧者のブラ�
   </defs>
   <rect x="10" y="10" width="120" height="44" fill="none" stroke="currentColor" stroke-width="1.5"/>
   <text x="70" y="38" text-anchor="middle" font-size="12" fill="currentColor">クライアント</text>
-
   <rect x="470" y="10" width="120" height="44" fill="none" stroke="currentColor" stroke-width="1.5"/>
   <text x="530" y="38" text-anchor="middle" font-size="12" fill="currentColor">サーバ</text>
-
   <line x1="130" y1="32" x2="468" y2="32" stroke="currentColor" stroke-width="1" stroke-dasharray="3 3" marker-end="url(#arrow-mitm)" marker-start="url(#arrow-mitm)"/>
   <text x="300" y="20" text-anchor="middle" font-size="10" fill="currentColor">本人たちは直接通信していると思っている</text>
-
   <rect x="240" y="140" width="120" height="50" stroke-width="1.5" style="stroke:var(--secondary)" fill="none"/>
   <text x="300" y="170" text-anchor="middle" font-size="12" style="fill:var(--secondary)">攻撃者</text>
-
   <line x1="70" y1="54" x2="260" y2="145" stroke-width="1.5" marker-end="url(#arrow-mitm)" style="stroke:var(--secondary)"/>
   <line x1="340" y1="145" x2="530" y2="54" stroke-width="1.5" marker-end="url(#arrow-mitm)" style="stroke:var(--secondary)"/>
   <text x="300" y="110" text-anchor="middle" font-size="10" style="fill:var(--secondary)">実際の経路: 攻撃者が中継・盗聴・改ざん</text>
@@ -185,27 +175,21 @@ C2サーバの指令で一斉に動作する、侵害済み端末(ボット)の�
     <rect x="10" y="40" width="90" height="44" fill="none" stroke="currentColor" stroke-width="1.5"/>
     <text x="55" y="65" text-anchor="middle">①偵察</text>
     <line x1="100" y1="62" x2="118" y2="62" stroke="currentColor" stroke-width="1.5" marker-end="url(#arrow-kc)"/>
-
     <rect x="120" y="40" width="90" height="44" fill="none" stroke="currentColor" stroke-width="1.5"/>
     <text x="165" y="65" text-anchor="middle">②武器化</text>
     <line x1="210" y1="62" x2="228" y2="62" stroke="currentColor" stroke-width="1.5" marker-end="url(#arrow-kc)"/>
-
     <rect x="230" y="40" width="90" height="44" fill="none" stroke="currentColor" stroke-width="1.5"/>
     <text x="275" y="65" text-anchor="middle">③配送</text>
     <line x1="320" y1="62" x2="338" y2="62" stroke="currentColor" stroke-width="1.5" marker-end="url(#arrow-kc)"/>
-
     <rect x="340" y="40" width="90" height="44" fill="none" stroke="currentColor" stroke-width="1.5"/>
     <text x="385" y="65" text-anchor="middle">④攻撃実行</text>
     <line x1="430" y1="62" x2="448" y2="62" stroke="currentColor" stroke-width="1.5" marker-end="url(#arrow-kc)"/>
-
     <rect x="450" y="40" width="90" height="44" fill="none" stroke="currentColor" stroke-width="1.5"/>
     <text x="495" y="65" text-anchor="middle">⑤インストール</text>
     <line x1="540" y1="62" x2="558" y2="62" stroke="currentColor" stroke-width="1.5" marker-end="url(#arrow-kc)"/>
-
     <rect x="560" y="40" width="90" height="44" fill="none" stroke="currentColor" stroke-width="1.5"/>
     <text x="605" y="65" text-anchor="middle">⑥C2</text>
     <line x1="650" y1="62" x2="668" y2="62" stroke="currentColor" stroke-width="1.5" marker-end="url(#arrow-kc)"/>
-
     <rect x="670" y="40" width="80" height="44" stroke-width="1.5" style="stroke:var(--secondary)" fill="none"/>
     <text x="710" y="65" text-anchor="middle" style="fill:var(--secondary)">⑦目的達成</text>
   </g>

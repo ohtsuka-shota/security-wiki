@@ -51,7 +51,6 @@ tags: ["glossary"]
     <text x="95" y="100" text-anchor="middle" font-size="10">容量=合算、冗長性なし</text>
     <text x="95" y="114" text-anchor="middle" font-size="10">1台故障で全データ失う</text>
   </g>
-
   <g font-size="11" fill="currentColor">
     <text x="320" y="20" text-anchor="middle">RAID1(ミラーリング)</text>
     <rect x="260" y="30" width="60" height="50" fill="none" stroke="currentColor" stroke-width="1.5"/>
@@ -61,7 +60,6 @@ tags: ["glossary"]
     <text x="325" y="100" text-anchor="middle" font-size="10">容量=1台分</text>
     <text x="325" y="114" text-anchor="middle" font-size="10">1台故障でも安全</text>
   </g>
-
   <g font-size="11" fill="currentColor">
     <text x="555" y="20" text-anchor="middle">RAID5(分散パリティ)</text>
     <rect x="460" y="30" width="55" height="40" stroke-width="1.5" style="stroke:var(--secondary)" fill="none"/>
@@ -70,14 +68,12 @@ tags: ["glossary"]
     <text x="547" y="55" text-anchor="middle" style="fill:var(--secondary)">A2</text>
     <rect x="580" y="30" width="55" height="40" stroke-width="1.5" style="stroke:var(--secondary)" fill="none"/>
     <text x="607" y="55" text-anchor="middle" style="fill:var(--secondary)">Ap</text>
-
     <rect x="460" y="75" width="55" height="40" fill="none" stroke="currentColor" stroke-width="1.5"/>
     <text x="487" y="100" text-anchor="middle">B1</text>
     <rect x="520" y="75" width="55" height="40" fill="none" stroke="currentColor" stroke-width="1.5"/>
     <text x="547" y="100" text-anchor="middle">Bp</text>
     <rect x="580" y="75" width="55" height="40" fill="none" stroke="currentColor" stroke-width="1.5"/>
     <text x="607" y="100" text-anchor="middle">B2</text>
-
     <text x="547" y="135" text-anchor="middle" font-size="10">容量≈(n-1)台分</text>
     <text x="547" y="149" text-anchor="middle" font-size="10">パリティ(P)で1台故障まで耐える</text>
   </g>

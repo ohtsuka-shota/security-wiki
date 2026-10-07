@@ -19,30 +19,22 @@ tags: ["glossary"]
   </defs>
   <rect x="10" y="70" width="110" height="60" fill="none" stroke="currentColor" stroke-width="1.5"/>
   <text x="65" y="105" text-anchor="middle" font-size="13" fill="currentColor">送信者</text>
-
   <rect x="180" y="70" width="130" height="60" fill="none" stroke="currentColor" stroke-width="1.5"/>
   <text x="245" y="105" text-anchor="middle" font-size="13" fill="currentColor">暗号化</text>
-
   <rect x="390" y="70" width="130" height="60" fill="none" stroke="currentColor" stroke-width="1.5"/>
   <text x="455" y="105" text-anchor="middle" font-size="13" fill="currentColor">復号</text>
-
   <rect x="600" y="70" width="110" height="60" fill="none" stroke="currentColor" stroke-width="1.5"/>
   <text x="655" y="105" text-anchor="middle" font-size="13" fill="currentColor">受信者</text>
-
   <line x1="120" y1="100" x2="178" y2="100" stroke="currentColor" stroke-width="1.5" marker-end="url(#arrow-pubkey)"/>
   <text x="149" y="92" text-anchor="middle" font-size="11" fill="currentColor">平文</text>
-
   <line x1="310" y1="100" x2="388" y2="100" stroke-width="1.5" marker-end="url(#arrow-pubkey)" style="stroke:var(--secondary)"/>
   <text x="349" y="88" text-anchor="middle" font-size="11" style="fill:var(--secondary)">暗号文</text>
   <text x="349" y="124" text-anchor="middle" font-size="10" style="fill:var(--secondary)">(盗聴されても解読不可)</text>
-
   <line x1="520" y1="100" x2="598" y2="100" stroke="currentColor" stroke-width="1.5" marker-end="url(#arrow-pubkey)"/>
   <text x="559" y="92" text-anchor="middle" font-size="11" fill="currentColor">平文</text>
-
   <rect x="180" y="8" width="130" height="38" fill="none" stroke="currentColor" stroke-width="1.5"/>
   <text x="245" y="31" text-anchor="middle" font-size="11" fill="currentColor">受信者の公開鍵</text>
   <line x1="245" y1="46" x2="245" y2="68" stroke="currentColor" stroke-width="1.5" marker-end="url(#arrow-pubkey)"/>
-
   <rect x="390" y="162" width="130" height="38" stroke-dasharray="4 3" fill="none" stroke="currentColor" stroke-width="1.5"/>
   <text x="455" y="185" text-anchor="middle" font-size="11" fill="currentColor">受信者の秘密鍵(非公開)</text>
   <line x1="455" y1="162" x2="455" y2="132" stroke="currentColor" stroke-width="1.5" marker-end="url(#arrow-pubkey)"/>
@@ -89,31 +81,23 @@ tags: ["glossary"]
   </defs>
   <rect x="10" y="70" width="110" height="60" fill="none" stroke="currentColor" stroke-width="1.5"/>
   <text x="65" y="105" text-anchor="middle" font-size="13" fill="currentColor">署名者</text>
-
   <rect x="180" y="70" width="170" height="60" fill="none" stroke="currentColor" stroke-width="1.5"/>
   <text x="265" y="100" text-anchor="middle" font-size="12" fill="currentColor">ハッシュ化して</text>
   <text x="265" y="116" text-anchor="middle" font-size="12" fill="currentColor">秘密鍵で署名</text>
-
   <rect x="450" y="70" width="170" height="60" fill="none" stroke="currentColor" stroke-width="1.5"/>
   <text x="535" y="100" text-anchor="middle" font-size="12" fill="currentColor">公開鍵で</text>
   <text x="535" y="116" text-anchor="middle" font-size="12" fill="currentColor">署名を検証</text>
-
   <rect x="660" y="70" width="110" height="60" fill="none" stroke="currentColor" stroke-width="1.5"/>
   <text x="715" y="105" text-anchor="middle" font-size="13" fill="currentColor">検証者</text>
-
   <line x1="120" y1="100" x2="178" y2="100" stroke="currentColor" stroke-width="1.5" marker-end="url(#arrow-sig)"/>
   <text x="149" y="92" text-anchor="middle" font-size="10" fill="currentColor">メッセージ</text>
-
   <line x1="350" y1="100" x2="448" y2="100" stroke-width="1.5" marker-end="url(#arrow-sig)" style="stroke:var(--secondary)"/>
   <text x="399" y="88" text-anchor="middle" font-size="10" style="fill:var(--secondary)">メッセージ+署名</text>
-
   <line x1="620" y1="100" x2="658" y2="100" stroke="currentColor" stroke-width="1.5" marker-end="url(#arrow-sig)"/>
   <text x="639" y="88" text-anchor="middle" font-size="9" fill="currentColor">OK/NG</text>
-
   <rect x="180" y="8" width="170" height="38" fill="none" stroke="currentColor" stroke-width="1.5"/>
   <text x="265" y="31" text-anchor="middle" font-size="11" fill="currentColor">署名者の秘密鍵</text>
   <line x1="265" y1="46" x2="265" y2="68" stroke="currentColor" stroke-width="1.5" marker-end="url(#arrow-sig)"/>
-
   <rect x="450" y="8" width="170" height="38" fill="none" stroke="currentColor" stroke-width="1.5"/>
   <text x="535" y="31" text-anchor="middle" font-size="11" fill="currentColor">署名者の公開鍵</text>
   <line x1="535" y1="46" x2="535" y2="68" stroke="currentColor" stroke-width="1.5" marker-end="url(#arrow-sig)"/>
@@ -133,25 +117,18 @@ tags: ["glossary"]
   </defs>
   <rect x="20" y="20" width="220" height="50" fill="none" stroke="currentColor" stroke-width="1.5"/>
   <text x="130" y="50" text-anchor="middle" font-size="12" fill="currentColor">ブラウザ/OSの信頼ストア</text>
-
   <line x1="80" y1="70" x2="80" y2="108" stroke="currentColor" stroke-width="1.5" marker-end="url(#arrow-pki)"/>
   <text x="130" y="95" text-anchor="start" font-size="10" fill="currentColor">事前に信頼(組み込み)</text>
-
   <rect x="20" y="110" width="160" height="50" fill="none" stroke="currentColor" stroke-width="1.5"/>
   <text x="100" y="140" text-anchor="middle" font-size="12" fill="currentColor">ルートCA</text>
-
   <line x1="180" y1="135" x2="238" y2="135" stroke="currentColor" stroke-width="1.5" marker-end="url(#arrow-pki)"/>
   <text x="209" y="127" text-anchor="middle" font-size="10" fill="currentColor">署名</text>
-
   <rect x="240" y="110" width="160" height="50" fill="none" stroke="currentColor" stroke-width="1.5"/>
   <text x="320" y="140" text-anchor="middle" font-size="12" fill="currentColor">中間CA</text>
-
   <line x1="400" y1="135" x2="458" y2="135" stroke="currentColor" stroke-width="1.5" marker-end="url(#arrow-pki)"/>
   <text x="429" y="127" text-anchor="middle" font-size="10" fill="currentColor">署名</text>
-
   <rect x="460" y="110" width="160" height="50" fill="none" stroke="currentColor" stroke-width="1.5"/>
   <text x="540" y="140" text-anchor="middle" font-size="12" fill="currentColor">サーバ証明書</text>
-
   <line x1="460" y1="185" x2="402" y2="185" stroke-width="1.5" marker-end="url(#arrow-pki)" style="stroke:var(--secondary)"/>
   <line x1="240" y1="185" x2="182" y2="185" stroke-width="1.5" marker-end="url(#arrow-pki)" style="stroke:var(--secondary)"/>
   <text x="320" y="202" text-anchor="middle" font-size="10" style="fill:var(--secondary)">検証はこの順でルートまでたどる</text>
@@ -181,20 +158,15 @@ tags: ["glossary"]
   <rect x="90" y="10" width="120" height="36" fill="none" stroke="currentColor" stroke-width="1.5"/>
   <text x="150" y="33" text-anchor="middle" font-size="12" fill="currentColor">クライアント</text>
   <line x1="150" y1="46" x2="150" y2="250" stroke="currentColor" stroke-width="1" stroke-dasharray="2 3"/>
-
   <rect x="490" y="10" width="120" height="36" fill="none" stroke="currentColor" stroke-width="1.5"/>
   <text x="550" y="33" text-anchor="middle" font-size="12" fill="currentColor">サーバ</text>
   <line x1="550" y1="46" x2="550" y2="250" stroke="currentColor" stroke-width="1" stroke-dasharray="2 3"/>
-
   <line x1="150" y1="80" x2="548" y2="80" stroke="currentColor" stroke-width="1.5" marker-end="url(#arrow-tls)"/>
   <text x="350" y="72" text-anchor="middle" font-size="11" fill="currentColor">① ClientHello(対応可能な暗号方式一覧)</text>
-
   <line x1="550" y1="120" x2="152" y2="120" stroke="currentColor" stroke-width="1.5" marker-end="url(#arrow-tls)"/>
   <text x="350" y="112" text-anchor="middle" font-size="11" fill="currentColor">② ServerHello + サーバ証明書</text>
-
   <line x1="150" y1="160" x2="548" y2="160" stroke="currentColor" stroke-width="1.5" marker-end="url(#arrow-tls)"/>
   <text x="350" y="152" text-anchor="middle" font-size="11" fill="currentColor">③ 証明書を検証 → 鍵交換用の情報を送付</text>
-
   <line x1="150" y1="200" x2="548" y2="200" stroke-width="1.5" marker-end="url(#arrow-tls)" style="stroke:var(--secondary)"/>
   <line x1="550" y1="215" x2="152" y2="215" stroke-width="1.5" marker-end="url(#arrow-tls)" style="stroke:var(--secondary)"/>
   <text x="350" y="238" text-anchor="middle" font-size="11" style="fill:var(--secondary)">④ Finished(以降は生成した共通鍵で暗号化通信)</text>

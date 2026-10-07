@@ -13,27 +13,21 @@ tags: ["glossary"]
     <rect x="10" y="10" width="400" height="40" fill="none" stroke="currentColor" stroke-width="1.5"/>
     <text x="30" y="35" font-size="13">7</text>
     <text x="215" y="35" text-anchor="middle">アプリケーション層</text>
-
     <rect x="10" y="50" width="400" height="40" fill="none" stroke="currentColor" stroke-width="1.5"/>
     <text x="30" y="75" font-size="13">6</text>
     <text x="215" y="75" text-anchor="middle">プレゼンテーション層</text>
-
     <rect x="10" y="90" width="400" height="40" fill="none" stroke="currentColor" stroke-width="1.5"/>
     <text x="30" y="115" font-size="13">5</text>
     <text x="215" y="115" text-anchor="middle">セッション層</text>
-
     <rect x="10" y="130" width="400" height="40" fill="none" stroke="currentColor" stroke-width="1.5"/>
     <text x="30" y="155" font-size="13">4</text>
     <text x="215" y="155" text-anchor="middle">トランスポート層(TCP/UDP)</text>
-
     <rect x="10" y="170" width="400" height="40" fill="none" stroke="currentColor" stroke-width="1.5"/>
     <text x="30" y="195" font-size="13">3</text>
     <text x="215" y="195" text-anchor="middle">ネットワーク層(IP)</text>
-
     <rect x="10" y="210" width="400" height="40" stroke-width="1.5" style="stroke:var(--secondary)" fill="none"/>
     <text x="30" y="235" font-size="13" style="fill:var(--secondary)">2</text>
     <text x="215" y="235" text-anchor="middle" style="fill:var(--secondary)">データリンク層(ARP/MAC) = L2</text>
-
     <rect x="10" y="250" width="400" height="40" fill="none" stroke="currentColor" stroke-width="1.5"/>
     <text x="30" y="275" font-size="13">1</text>
     <text x="215" y="275" text-anchor="middle">物理層</text>
@@ -65,24 +59,18 @@ IPアドレスからMACアドレスを解決するプロトコル。同一LAN内
   </defs>
   <rect x="20" y="20" width="140" height="50" fill="none" stroke="currentColor" stroke-width="1.5"/>
   <text x="90" y="50" text-anchor="middle" font-size="12" fill="currentColor">被害者PC</text>
-
   <rect x="470" y="20" width="150" height="50" fill="none" stroke="currentColor" stroke-width="1.5"/>
   <text x="545" y="50" text-anchor="middle" font-size="12" fill="currentColor">本来のゲートウェイ</text>
-
   <rect x="240" y="190" width="160" height="50" fill="none" stroke="currentColor" stroke-width="1.5"/>
   <text x="320" y="220" text-anchor="middle" font-size="12" fill="currentColor">攻撃者</text>
-
   <line x1="240" y1="200" x2="155" y2="70" stroke-width="1.5" marker-end="url(#arrow-arp)" style="stroke:var(--secondary)"/>
   <text x="130" y="140" text-anchor="middle" font-size="10" style="fill:var(--secondary)">① 偽ARP応答</text>
   <text x="130" y="154" text-anchor="middle" font-size="10" style="fill:var(--secondary)">「ゲートウェイのIPは自分のMAC」</text>
-
   <line x1="90" y1="70" x2="260" y2="195" stroke-width="1.5" marker-end="url(#arrow-arp)" style="stroke:var(--secondary)"/>
   <text x="210" y="105" text-anchor="middle" font-size="10" style="fill:var(--secondary)">② 気づかず全通信を送信</text>
-
   <line x1="380" y1="195" x2="530" y2="72" stroke="currentColor" stroke-width="1.5" marker-end="url(#arrow-arp)"/>
   <text x="500" y="140" text-anchor="middle" font-size="10" fill="currentColor">③ そのまま中継</text>
   <text x="500" y="154" text-anchor="middle" font-size="10" fill="currentColor">(盗聴・改ざん可能)</text>
-
   <line x1="160" y1="35" x2="468" y2="35" stroke="currentColor" stroke-width="1" stroke-dasharray="3 3"/>
   <text x="320" y="25" text-anchor="middle" font-size="10" fill="currentColor">本来の直接通信(攻撃前)</text>
 </svg>
@@ -110,29 +98,21 @@ IPアドレスなどのネットワーク設定をクライアントに動的に
   </defs>
   <rect x="10" y="220" width="110" height="50" fill="none" stroke="currentColor" stroke-width="1.5"/>
   <text x="65" y="250" text-anchor="middle" font-size="12" fill="currentColor">クライアント</text>
-
   <rect x="190" y="220" width="140" height="50" fill="none" stroke="currentColor" stroke-width="1.5"/>
   <text x="260" y="250" text-anchor="middle" font-size="12" fill="currentColor">キャッシュDNS</text>
-
   <rect x="440" y="10" width="170" height="40" fill="none" stroke="currentColor" stroke-width="1.5"/>
   <text x="525" y="35" text-anchor="middle" font-size="12" fill="currentColor">ルートDNSサーバ</text>
-
   <rect x="440" y="90" width="170" height="40" fill="none" stroke="currentColor" stroke-width="1.5"/>
   <text x="525" y="115" text-anchor="middle" font-size="12" fill="currentColor">TLD権威DNSサーバ</text>
-
   <rect x="440" y="170" width="170" height="40" fill="none" stroke="currentColor" stroke-width="1.5"/>
   <text x="525" y="195" text-anchor="middle" font-size="12" fill="currentColor">権威DNSサーバ</text>
-
   <line x1="120" y1="245" x2="188" y2="245" stroke="currentColor" stroke-width="1.5" marker-end="url(#arrow-dns)" marker-start="url(#arrow-dns)"/>
   <text x="154" y="265" text-anchor="middle" font-size="9" fill="currentColor">①質問 / ⑧回答</text>
-
   <line x1="330" y1="235" x2="438" y2="30" stroke="currentColor" stroke-width="1.5" marker-end="url(#arrow-dns)" marker-start="url(#arrow-dns)"/>
   <text x="400" y="130" text-anchor="middle" font-size="9" fill="currentColor" transform="rotate(0)"></text>
   <text x="345" y="170" text-anchor="start" font-size="9" fill="currentColor">②問合せ/③「.comはTLDへ」</text>
-
   <line x1="330" y1="245" x2="438" y2="110" stroke-width="1.5" marker-end="url(#arrow-dns)" marker-start="url(#arrow-dns)" style="stroke:var(--secondary)"/>
   <text x="345" y="200" text-anchor="start" font-size="9" style="fill:var(--secondary)">④問合せ/⑤「権威DNSへ」</text>
-
   <line x1="330" y1="252" x2="438" y2="192" stroke="currentColor" stroke-width="1.5" marker-end="url(#arrow-dns)" marker-start="url(#arrow-dns)"/>
   <text x="345" y="228" text-anchor="start" font-size="9" fill="currentColor">⑥問合せ/⑦IPアドレスを回答</text>
 </svg>
@@ -167,24 +147,19 @@ DNS応答に電子署名を付与し、応答の正当性を検証できるよ�
   </defs>
   <rect x="10" y="50" width="120" height="50" fill="none" stroke="currentColor" stroke-width="1.5"/>
   <text x="70" y="80" text-anchor="middle" font-size="12" fill="currentColor">インターネット</text>
-
   <line x1="130" y1="75" x2="260" y2="75" stroke="currentColor" stroke-width="1.5" marker-end="url(#arrow-dmz)"/>
   <rect x="165" y="55" width="30" height="40" fill="none" stroke="currentColor" stroke-width="1.5"/>
   <text x="180" y="110" text-anchor="middle" font-size="10" fill="currentColor">FW1</text>
   <text x="180" y="40" text-anchor="middle" font-size="9" fill="currentColor">80/443のみ許可</text>
-
   <rect x="260" y="50" width="130" height="50" fill="none" stroke="currentColor" stroke-width="1.5"/>
   <text x="325" y="72" text-anchor="middle" font-size="11" fill="currentColor">DMZ</text>
   <text x="325" y="88" text-anchor="middle" font-size="10" fill="currentColor">Web/メールサーバ</text>
-
   <line x1="390" y1="75" x2="520" y2="75" stroke="currentColor" stroke-width="1.5" marker-end="url(#arrow-dmz)"/>
   <rect x="440" y="55" width="30" height="40" fill="none" stroke="currentColor" stroke-width="1.5"/>
   <text x="455" y="110" text-anchor="middle" font-size="10" fill="currentColor">FW2</text>
   <text x="455" y="40" text-anchor="middle" font-size="9" fill="currentColor">必要最小限のみ許可</text>
-
   <rect x="510" y="50" width="120" height="50" fill="none" stroke="currentColor" stroke-width="1.5"/>
   <text x="570" y="80" text-anchor="middle" font-size="12" fill="currentColor">内部ネットワーク</text>
-
   <path d="M70,50 Q320,-30 570,50" fill="none" stroke-width="1.5" stroke-dasharray="4 3" marker-end="url(#arrow-dmz)" style="stroke:var(--secondary)"/>
   <text x="320" y="12" text-anchor="middle" font-size="10" style="fill:var(--secondary)">✕ 内部への直接到達は許可しない</text>
 </svg>
@@ -206,17 +181,13 @@ DNS応答に電子署名を付与し、応答の正当性を検証できるよ�
   </defs>
   <rect x="10" y="55" width="100" height="50" fill="none" stroke="currentColor" stroke-width="1.5"/>
   <text x="60" y="85" text-anchor="middle" font-size="12" fill="currentColor">クライアント</text>
-
   <rect x="190" y="10" width="200" height="140" fill="none" stroke="currentColor" stroke-width="1" stroke-dasharray="3 3"/>
   <text x="290" y="28" text-anchor="middle" font-size="10" fill="currentColor">インターネット(公衆網)</text>
-
   <line x1="110" y1="80" x2="470" y2="80" stroke-width="4" marker-end="url(#arrow-vpn)" style="stroke:var(--secondary)"/>
   <text x="290" y="68" text-anchor="middle" font-size="11" style="fill:var(--secondary)">暗号化トンネル</text>
-
   <rect x="470" y="55" width="130" height="50" fill="none" stroke="currentColor" stroke-width="1.5"/>
   <text x="535" y="78" text-anchor="middle" font-size="11" fill="currentColor">VPN</text>
   <text x="535" y="94" text-anchor="middle" font-size="11" fill="currentColor">ゲートウェイ</text>
-
   <line x1="600" y1="80" x2="630" y2="80" stroke="currentColor" stroke-width="1.5" marker-end="url(#arrow-vpn)"/>
   <text x="615" y="130" text-anchor="middle" font-size="9" fill="currentColor">社内</text>
   <text x="615" y="142" text-anchor="middle" font-size="9" fill="currentColor">(平文で到達)</text>

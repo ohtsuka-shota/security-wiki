@@ -18,23 +18,18 @@ tags: ["glossary"]
     <rect x="10" y="50" width="95" height="44" fill="none" stroke="currentColor" stroke-width="1.5"/>
     <text x="57" y="75" text-anchor="middle">準備</text>
     <line x1="105" y1="72" x2="123" y2="72" stroke="currentColor" stroke-width="1.5" marker-end="url(#arrow-ir)"/>
-
     <rect x="125" y="50" width="100" height="44" fill="none" stroke="currentColor" stroke-width="1.5"/>
     <text x="175" y="75" text-anchor="middle">検知・分析</text>
     <line x1="225" y1="72" x2="243" y2="72" stroke="currentColor" stroke-width="1.5" marker-end="url(#arrow-ir)"/>
-
     <rect x="245" y="50" width="100" height="44" fill="none" stroke="currentColor" stroke-width="1.5"/>
     <text x="295" y="75" text-anchor="middle">封じ込め</text>
     <line x1="345" y1="72" x2="363" y2="72" stroke="currentColor" stroke-width="1.5" marker-end="url(#arrow-ir)"/>
-
     <rect x="365" y="50" width="90" height="44" fill="none" stroke="currentColor" stroke-width="1.5"/>
     <text x="410" y="75" text-anchor="middle">根絶</text>
     <line x1="455" y1="72" x2="473" y2="72" stroke="currentColor" stroke-width="1.5" marker-end="url(#arrow-ir)"/>
-
     <rect x="475" y="50" width="90" height="44" fill="none" stroke="currentColor" stroke-width="1.5"/>
     <text x="520" y="75" text-anchor="middle">復旧</text>
     <line x1="565" y1="72" x2="583" y2="72" stroke="currentColor" stroke-width="1.5" marker-end="url(#arrow-ir)"/>
-
     <rect x="585" y="50" width="90" height="44" stroke-width="1.5" style="stroke:var(--secondary)" fill="none"/>
     <text x="630" y="75" text-anchor="middle" style="fill:var(--secondary)">事後対応</text>
   </g>
