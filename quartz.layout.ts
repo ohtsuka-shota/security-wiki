@@ -48,6 +48,11 @@ export const defaultContentPageLayout: PageLayout = {
         repelForce: 0.6,
         linkDistance: 40,
         fontSize: 0.7,
+        showTags: false,
+        focusOnHover: true,
+      },
+      globalGraph: {
+        focusOnHover: true,
       },
     }),
     Component.DesktopOnly(Component.TableOfContents()),

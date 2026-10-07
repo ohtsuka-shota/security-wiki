@@ -1,3 +1,72 @@
 @use "./base.scss";
 
 // put your custom CSS here!
+
+// --- custom scrollbar (matches the dark-tech palette instead of the OS default) ---
+* {
+  scrollbar-color: var(--gray) transparent;
+  scrollbar-width: thin;
+}
+
+*::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: var(--gray);
+  border-radius: 6px;
+  border: 2px solid transparent;
+  background-clip: content-box;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background-color: var(--secondary);
+}
+
+// --- folder/tag listing: lift + accent border on hover ---
+li.section-li {
+  transition:
+    transform 0.15s ease,
+    border-color 0.15s ease;
+  border-left: 2px solid transparent;
+  padding-left: 0.75rem;
+  margin-left: -0.75rem;
+
+  &:hover {
+    transform: translateX(2px);
+    border-left-color: var(--secondary);
+  }
+}
+
+// --- local graph panel: subtle accent glow on hover ---
+.graph > .graph-outer {
+  transition: box-shadow 0.25s ease, border-color 0.25s ease;
+
+  &:hover {
+    border-color: var(--secondary);
+    box-shadow: 0 0 16px 0 var(--highlight);
+  }
+}
+
+// --- headings: faint accent bar for a slightly more "tech" look ---
+h1,
+h2 {
+  position: relative;
+  padding-left: 0.75rem;
+
+  &::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.15em;
+    bottom: 0.15em;
+    width: 3px;
+    border-radius: 2px;
+    background: linear-gradient(to bottom, var(--secondary), var(--tertiary));
+  }
+}
