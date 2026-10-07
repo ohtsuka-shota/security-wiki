@@ -2,7 +2,7 @@
 title: "【自宅ラボ検証】Linux権限昇格の基礎ハンズオン（Hydra / SUID nmap / Dirty COW）"
 date: 2026-09-16
 tags: ["vulnerability", "DirtyCOW", "Nmap", "権限昇格", "Security", "KaliLinux"]
-source: "[[linux-privilege-escalation-basics-hydra-suid-dirtycow]]"
+source: "https://qiita.com/ohtsuka-shota/items/14c34b103eb6ace29f0f"
 ---
 :::note warn
 警告

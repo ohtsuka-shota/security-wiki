@@ -2,7 +2,7 @@
 title: "サーバ証明書を使ってapache2への通信を暗号化(https化)する"
 date: 2024-04-14
 tags: ["tool", "Apache", "apache2", "HTTPS", "暗号化", "サーバ証明書"]
-source: "[[apache2-https-server-certificate]]"
+source: "https://qiita.com/ohtsuka-shota/items/e042dd1d8d84177b9b39"
 ---
 こんにちは。
 株式会社クラスアクト インフラストラクチャ事業部の大塚です。

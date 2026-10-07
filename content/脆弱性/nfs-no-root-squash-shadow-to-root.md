@@ -2,7 +2,7 @@
 title: "【自宅ラボ検証】NFSの設定ミス（no_root_squash）からshadow奪取→root化までやってみた"
 date: 2026-09-17
 tags: ["vulnerability", "JohntheRipper", "hashcat", "password", "KaliLinux", "Security"]
-source: "[[nfs-no-root-squash-shadow-to-root]]"
+source: "https://qiita.com/ohtsuka-shota/items/8cad007418b48cb8c784"
 ---
 # 初めに
 

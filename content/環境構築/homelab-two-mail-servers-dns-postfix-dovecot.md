@@ -2,7 +2,7 @@
 title: "ホームラボで2台のメールサーバ間送受信環境を構築 - 自作DNS + Postfix + Dovecot + Thunderbird"
 date: 2026-09-20
 tags: ["tool", "dns", "mDNS", "postfix", "dovecot", "thunderbird"]
-source: "[[homelab-two-mail-servers-dns-postfix-dovecot]]"
+source: "https://qiita.com/ohtsuka-shota/items/b977a3acb56ad587f264"
 ---
 # はじめに
 私はホームラボ上に以下の記事のようにメールサーバを2台構築していたり、ホームラボ用のDNS環境を用意しております。

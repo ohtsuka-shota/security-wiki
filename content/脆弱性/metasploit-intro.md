@@ -2,7 +2,7 @@
 title: "ハッキングゲームがきっかけでMetasploitに入門してみた"
 date: 2026-09-15
 tags: ["vulnerability", "エシカルハッキング", "metasploit", "exploit", "Nmap", "ゲーム"]
-source: "[[metasploit-intro]]"
+source: "https://qiita.com/ohtsuka-shota/items/84bfbc28f549fc61b062"
 ---
 # はじめに
 HACKHUBというPCゲーをやっていたりします。

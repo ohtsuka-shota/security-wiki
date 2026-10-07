@@ -2,7 +2,7 @@
 title: "OpenSSLを使ったプライベートCA環境の構築とサーバ証明書の作成手順"
 date: 2024-04-14
 tags: ["tool", "Security", "OpenSSL", "サーバ証明書", "自己署名証明書"]
-source: "[[openssl-private-ca]]"
+source: "https://qiita.com/ohtsuka-shota/items/5142e7c9de518a036c7b"
 ---
 こんにちは。
 株式会社クラスアクト インフラストラクチャ事業部の大塚です。

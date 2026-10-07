@@ -2,7 +2,7 @@
 title: "そのユーザー名、使い回してませんか？Sherlock/theHarvesterで偵察フェーズを試してみた"
 date: 2026-09-17
 tags: ["vulnerability", "sherlock", "theharvester", "KaliLinux", "Security", "エシカルハッキング"]
-source: "[[recon-sherlock-theharvester]]"
+source: "https://qiita.com/ohtsuka-shota/items/6ff4c7866deb31fdf6f9"
 ---
 # はじめに
 :::note warn

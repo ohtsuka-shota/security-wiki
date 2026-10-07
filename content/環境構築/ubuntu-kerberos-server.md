@@ -2,7 +2,7 @@
 title: "ubuntu22.04でKerberosサーバを構築"
 date: 2025-02-17
 tags: ["tool", "Ubuntu", "Security", "Kerberos", "LPIC303"]
-source: "[[ubuntu-kerberos-server]]"
+source: "https://qiita.com/ohtsuka-shota/items/d488467f7f9c7675600e"
 ---
 こんにちは。
 株式会社クラスアクト インフラストラクチャ事業部の大塚です。

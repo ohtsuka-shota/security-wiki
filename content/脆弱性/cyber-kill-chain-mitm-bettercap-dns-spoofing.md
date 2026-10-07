@@ -2,7 +2,7 @@
 title: "サイバーキルチェーンで学ぶ中間者攻撃（MitM）実践：Bettercapを使ったDNSスプーフィングと偽Webサイト誘導の検証"
 date: 2026-09-19
 tags: ["vulnerability", "bettercap", "ARP", "dns", "KaliLinux", "Security"]
-source: "[[cyber-kill-chain-mitm-bettercap-dns-spoofing]]"
+source: "https://qiita.com/ohtsuka-shota/items/dc6af0966aa835954523"
 ---
 # はじめに
 :::note warn

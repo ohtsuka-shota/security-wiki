@@ -2,7 +2,7 @@
 title: "【ホームラボ構築】OpenLDAP（ID管理）とKerberos（認証）をSSSDでつなげてみた"
 date: 2026-09-21
 tags: ["tool", "Kerberos", "openldap", "chrony", "dns", "sssd"]
-source: "[[openldap-kerberos-sssd-homelab]]"
+source: "https://qiita.com/ohtsuka-shota/items/bef8f912278ed06ef19d"
 ---
 # 初めに
 私は以下の記事をベースに、自宅のホームラボで検証環境を作りながらセキュリティまわりの勉強をしています。今回はこれまで個別に構築してきたDNS・OpenLDAP・Kerberosの環境を組み合わせ、LDAPで管理しているユーザーをKerberos認証でログインさせる、という統合を行いました。これはその記事となります。

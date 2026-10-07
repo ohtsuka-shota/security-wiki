@@ -2,7 +2,7 @@
 title: "Proxmox VE上のコンテナにSSH接続する"
 date: 2023-10-03
 tags: ["tool", "Ubuntu", "SSH", "lxc", "proxmox", "container"]
-source: "[[proxmox-ve-container-ssh]]"
+source: "https://qiita.com/ohtsuka-shota/items/d9338e2a31c42426620b"
 ---
 こんにちは。
 株式会社クラスアクト インフラストラクチャ事業部の大塚です。

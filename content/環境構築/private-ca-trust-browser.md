@@ -2,7 +2,7 @@
 title: "SEC_ERROR_UNKNOWN_ISSUERを消してみる ― プライベートCAをブラウザに信頼させる"
 date: 2026-09-22
 tags: ["tool", "KaliLinux", "Firefox", "証明書ストア", "SSL", "HTTPS"]
-source: "[[private-ca-trust-browser]]"
+source: "https://qiita.com/ohtsuka-shota/items/fdff441094f8fcae6bf5"
 ---
 # はじめに
 以前、以下の記事でプライベートCAを構築し、ApacheのサーバーをそのプライベートCAが発行した証明書でHTTPS化しました。この流れで、プライベートCAで署名したサーバ証明書を使っていても警告を発生させない流れや、なぜ発生するのかという事を備忘でまとめていきたいと思います。

@@ -2,7 +2,7 @@
 title: "ルートDNS/TLD/権威DNS/キャッシュDNSを構築して名前解決の流れを理解する"
 date: 2026-04-05
 tags: ["tool", "Linux", "Ubuntu", "dns", "bind", "名前解決"]
-source: "[[dns-root-tld-authoritative-cache]]"
+source: "https://qiita.com/ohtsuka-shota/items/9dad0942c6a3afb7a8cc"
 ---
 諸般の理由でProxmox上に用意しているホームラボに名前解決環境を用意したかったので、メモっておきます。
 なお、2年くらい前にDNSについては軽く書いてますが、今回の方がかなり複雑であると思います。

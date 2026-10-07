@@ -2,7 +2,7 @@
 title: "ubuntu22.04にDNSサーバを構築する"
 date: 2024-05-29
 tags: ["tool", "Ubuntu", "dns", "bind"]
-source: "[[ubuntu-dns-server]]"
+source: "https://qiita.com/ohtsuka-shota/items/1456eb891f6ac4164987"
 ---
 こんにちは。
 株式会社クラスアクト インフラストラクチャ事業部の大塚です。

@@ -2,7 +2,7 @@
 title: "KerberosチケットでSSHのパスワード入力を省く（SSH GSSAPI化）をやってみた"
 date: 2026-10-03
 tags: ["tool", "sssd", "Kerberos", "openldap", "SSO", "GSSAPI"]
-source: "[[kerberos-ssh-gssapi]]"
+source: "https://qiita.com/ohtsuka-shota/items/8901a64e6a404d4619ff"
 ---
 # はじめに
 こちらの記事（SSSD＋OpenLDAP＋Kerberosで、SSH・RDP・メールのログインを統合認証してみた）の続きとなります。

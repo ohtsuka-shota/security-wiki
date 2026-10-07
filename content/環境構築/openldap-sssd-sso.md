@@ -2,7 +2,7 @@
 title: "OpenLDAP + SSSDでLinuxのSSO環境を構築する"
 date: 2026-08-02
 tags: ["tool", "openldap", "sssd", "Ubuntu24.04", "Linux", "SSO"]
-source: "[[openldap-sssd-sso]]"
+source: "https://qiita.com/ohtsuka-shota/items/b55cfd16c3a0166d683e"
 ---
 # 用語
 ## OpenLDAP

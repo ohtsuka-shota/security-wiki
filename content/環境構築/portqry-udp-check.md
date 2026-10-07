@@ -2,7 +2,7 @@
 title: "【PortQry】Windows ServerでUDPの疎通確認をする手順と気づき"
 date: 2025-10-25
 tags: ["tool", "Windows", "Network", "AWS", "Firewall", "PortQry"]
-source: "[[portqry-udp-check]]"
+source: "https://qiita.com/ohtsuka-shota/items/8b90854ef27eea509ee3"
 ---
 タイトルの通りです。UDPのポートが空いていることを確認したいと思っても、Windowsの標準機能だとなかなか難しいようで。。。
 それを解消するためにMicrosoftがexeを用意しているらしいので、それを使ってみたいと思います。

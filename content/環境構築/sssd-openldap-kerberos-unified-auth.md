@@ -2,7 +2,7 @@
 title: "SSSD＋OpenLDAP＋Kerberosで、SSH・RDP・メールのログインを統合認証してみた"
 date: 2026-09-22
 tags: ["tool", "Kerberos", "sssd", "openldap", "Desktop", "LDAP"]
-source: "[[sssd-openldap-kerberos-unified-auth]]"
+source: "https://qiita.com/ohtsuka-shota/items/6f7b71568ac6810383d2"
 ---
 # はじめに
 

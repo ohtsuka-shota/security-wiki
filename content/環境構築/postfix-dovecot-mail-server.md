@@ -2,7 +2,7 @@
 title: "【検証環境】Postfix/Dovecotでメール送受信サーバーを一から構築し、Thunderbirdで確認するまで"
 date: 2026-07-26
 tags: ["tool", "postfix", "dovecot", "thunderbird", "Ubuntu24.04", "Python"]
-source: "[[postfix-dovecot-mail-server]]"
+source: "https://qiita.com/ohtsuka-shota/items/60434628556ca60b1b6d"
 ---
 # 用語
 ## Postfix 

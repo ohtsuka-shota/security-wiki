@@ -2,7 +2,7 @@
 title: "Dockerでsmtp4devを立ててPythonからメール送信をテストする"
 date: 2026-07-25
 tags: ["tool", "Docker", "Python", "SMTP", "smtp4dev", "mail"]
-source: "[[docker-smtp4dev]]"
+source: "https://qiita.com/ohtsuka-shota/items/9db1723540c0e686c156"
 ---
 本業でメールをPythonで送付するという機会がありました。その時にsmtp4devというコンテナを作ると検証用のメールサーバをお手軽に作れるなぁと感動しました。
 今後の自分の為にメモっておきます。

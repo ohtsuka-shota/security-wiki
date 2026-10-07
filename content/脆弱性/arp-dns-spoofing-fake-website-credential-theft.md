@@ -2,7 +2,7 @@
 title: "【自宅ラボ検証】ARP/DNSスプーフィングから偽装Webサイトを使って認証情報を搾取する"
 date: 2026-09-19
 tags: ["vulnerability", "偽装", "Web", "フィッシング", "Security", "KaliLinux"]
-source: "[[arp-dns-spoofing-fake-website-credential-theft]]"
+source: "https://qiita.com/ohtsuka-shota/items/b46ebb705e2f82b72f9a"
 ---
 # はじめに
 :::note warn

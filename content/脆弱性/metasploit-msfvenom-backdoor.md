@@ -2,7 +2,7 @@
 title: "Metasploitとmsfvenomでバックドアを仕込んでみる"
 date: 2026-09-16
 tags: ["vulnerability", "エシカルハッキング", "Security", "metasploit", "msfvenom", "KaliLinux"]
-source: "[[metasploit-msfvenom-backdoor]]"
+source: "https://qiita.com/ohtsuka-shota/items/ba0a8c2ded36df75ff84"
 ---
 MetasploitとMetasploitable VMを使ってバックドアを仕掛ける手順を学んでみたいと思います。
 バックドアを仕込むことで、初期侵入経路がふさがれたとしても、別の方法で侵入出来るようにしていきたいと思います。

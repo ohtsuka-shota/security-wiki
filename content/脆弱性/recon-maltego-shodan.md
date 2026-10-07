@@ -2,7 +2,7 @@
 title: "そのサーバ、勝手に覗かれてませんか？MaltegoとShodanで偵察フェーズをちょっと深掘りしてみた"
 date: 2026-09-17
 tags: ["vulnerability", "Maltego", "Shodan", "KaliLinux", "エシカルハッキング", "Security"]
-source: "[[recon-maltego-shodan]]"
+source: "https://qiita.com/ohtsuka-shota/items/1f5f9ce03c11642a3d23"
 ---
 # 初めに
 前回、Sherlock/theHarvesterで偵察フェーズの一端（SNSアカウントの洗い出し、ドメイン起点の情報収集）を試しました。今回はその続編として、同じ「偵察」フェーズをもう一段深掘りします。

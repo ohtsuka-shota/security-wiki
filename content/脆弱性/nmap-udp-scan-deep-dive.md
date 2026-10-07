@@ -2,7 +2,7 @@
 title: "nmap UDPスキャン徹底理解：遅い理由・open|filtered・サービス固有プローブ"
 date: 2026-10-07
 tags: ["vulnerability", "Nmap", "udp", "tcpdump", "Security"]
-source: "[[nmap-udp-scan-deep-dive]]"
+source: "https://qiita.com/ohtsuka-shota/items/ce05eff93b240b24bf10"
 ---
 # TCPポートスキャンとUDPポートスキャンの違い
 

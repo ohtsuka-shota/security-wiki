@@ -2,7 +2,7 @@
 title: "ubuntu22.04にNTP(chrony)環境を作るよ"
 date: 2024-05-31
 tags: ["tool", "Ubuntu", "ntp", "chrony"]
-source: "[[ubuntu-ntp-chrony]]"
+source: "https://qiita.com/ohtsuka-shota/items/11f5100f7dcb52b9996d"
 ---
 こんにちは。
 株式会社クラスアクト インフラストラクチャ事業部の大塚です。

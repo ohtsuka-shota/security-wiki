@@ -2,7 +2,7 @@
 title: "Proxmox VE上にコンテナをデプロイする"
 date: 2023-10-01
 tags: ["tool", "lxc", "proxmox", "container"]
-source: "[[proxmox-ve-container-deploy]]"
+source: "https://qiita.com/ohtsuka-shota/items/a46b79af31a44a236704"
 ---
 こんにちは。
 株式会社クラスアクト インフラストラクチャ事業部の大塚です。
