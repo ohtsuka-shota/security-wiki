@@ -28,3 +28,21 @@ tags: [vulnerability, incident, countermeasure, tool]
 - CVE Database: https://cve.mitre.org/
 - JPCERT/CC: https://www.jpcert.or.jp/
 - IPA: https://www.ipa.go.jp/security/
+
+## 新規ページの作成方法
+
+1. **Obsidianで新規ノートを作成**
+   対象フォルダ(`対策`・`インシデント`・`環境構築`・`脆弱性`・`用語集`)を右クリック→「新規ノート」。ファイル名がそのままURLのスラッグになるので、英数字ハイフン推奨(日本語ファイル名だとURLが長いエンコード文字列になる)。
+
+2. **frontmatterを付ける**
+   上記「Frontmatter必須項目」の形式で先頭に追加する。
+
+3. **本文を書く**
+   `[[記事名]]`でObsidianのWikiリンクが使える。ファイル名が一致していればフォルダが違っても自動でリンクされる。
+
+4. **GitHubにpushする**
+   - Claude Codeに「pushして」と頼む
+   - 自分で `git add -A && git commit -m "..." && git push`
+   - Obsidian Gitプラグインを導入すれば自動コミット・push可能
+
+pushすると、GitHub Actionsが自動でビルド・デプロイし、数分後に https://ohtsuka-shota.github.io/security-wiki に反映される。
