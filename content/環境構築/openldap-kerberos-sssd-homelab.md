@@ -20,13 +20,13 @@ source: "https://qiita.com/ohtsuka-shota/items/bef8f912278ed06ef19d"
 Kerberosは認証にタイムスタンプを利用する仕組み上、サーバ間の時刻がズレていると正しく動作しません。そのため、まず時刻同期の仕組みを用意しています。
 
 流れとしては、サーバがホームラボに用意しているキャッシュDNSへ問い合わせを行い、キャッシュDNSが外部のDNSへNICTのドメインの名前解決を依頼します。取得できたIPアドレスを使って、実際にNICTのNTPサーバへ接続し時刻同期を行う、という構成です。
-![](./openldap-kerberos-sssd-homelab-images/img01.png)
+![](環境構築/openldap-kerberos-sssd-homelab-images/img01.png)
 
 ## OpenLDAP/SSSD/Kerberos
 続いて、実際にドメインユーザーでログインする際の通信の流れです。
 
 ポイントは、SSSDが「パスワードが正しいかどうかの検証（Kerberos）」と「Linuxユーザーとしての情報取得（OpenLDAP）」という2つの役割を仲介している点です。それぞれの通信の前段階で、ホームラボのDNS環境（キャッシュDNS→ルートDNS→TLD DNS→権威DNS）による名前解決が挟まっており、ここが正しく機能していないとSSSDのバックエンド（今回の場合KerberosとOpenLDAP）がオフラインになって、うまく認証できない状態になります。
-![](./openldap-kerberos-sssd-homelab-images/img02.png)
+![](環境構築/openldap-kerberos-sssd-homelab-images/img02.png)
 
 # 環境構築
 ## 名前解決（DNS）周りの整備

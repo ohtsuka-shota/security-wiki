@@ -54,7 +54,7 @@ HTTPS、HSTS、多要素認証、ネットワーク監視などの防御策の�
 ## 全体構成
 緑が正規通信フロー、赤がスプーフィングの結果行われる偽装通信フローになります。
 今回は正規/偽装Webサーバで公開されているページが認証情報を求められるページだった時に、どのように認証情報が不正に取得されるか、その環境を簡易的ですが作ってみたいと思います。
-![](./arp-dns-spoofing-fake-website-credential-theft-images/img01.png)
+![](脆弱性/arp-dns-spoofing-fake-website-credential-theft-images/img01.png)
 
 # 環境構築
 ## 正規Webサイトの整備
@@ -488,10 +488,10 @@ root@www:~# systemctl restart apache2
 
 この状態でARP/DNSスプーフィングの被害にあっていないPC想定のVMから正規Webサイトにアクセスします。
 ユーザ名/パスワードをtest/passwordとします。
-![](./arp-dns-spoofing-fake-website-credential-theft-images/img02.png)
+![](脆弱性/arp-dns-spoofing-fake-website-credential-theft-images/img02.png)
 
 ログイン出来ました
-![](./arp-dns-spoofing-fake-website-credential-theft-images/img03.png)
+![](脆弱性/arp-dns-spoofing-fake-website-credential-theft-images/img03.png)
 
 この時正規Webサーバのログにユーザ名とパスワードが記載されています。
 ※本来であればlogに暗号化をされない状態で保存されることは無いとは思いますが。
@@ -660,11 +660,11 @@ Kaliにはphpをインストールしていないので、インストールし�
 ## DNSスプーフィングの影響を受けているPCから偽装Webサイトにアクセス
 偽装Webサイトにアクセスします。www.example.comで名前解決するとDNSスプーフィングで偽装され、攻撃者が用意したWebページが表示されていることがわかります。
 ここにユーザ名とパスワードを入力します。
-![](./arp-dns-spoofing-fake-website-credential-theft-images/img04.png)
+![](脆弱性/arp-dns-spoofing-fake-website-credential-theft-images/img04.png)
 
 すると、login.phpで記載されたように正規サイトのログイン画面にリダイレクトされます。
 利用者が異常に気付けなければ「あれ、パスワード間違えたかな？」と疑うのも無理は無さそうです。（URLの欄を見るとドメインではなくIPアドレスで通信しているのもおかしいのですが、やっぱり気づくのは難しいかもしれません）
-![](./arp-dns-spoofing-fake-website-credential-theft-images/img05.png)
+![](脆弱性/arp-dns-spoofing-fake-website-credential-theft-images/img05.png)
 
 このタイミングで攻撃者にはユーザ名とパスワードがログに書かれてしまいます。
 この結果、偽装サイト側で入力された認証情報が第三者に知られる可能性があります。
@@ -676,9 +676,9 @@ Kaliにはphpをインストールしていないので、インストールし�
 # cat cookies.log 
 [2026-09-19 12:05:17] (CAPTURED) IP: 192.168.0.62 | Cookies: []
 ```
-![](./arp-dns-spoofing-fake-website-credential-theft-images/img06.png)
+![](脆弱性/arp-dns-spoofing-fake-website-credential-theft-images/img06.png)
 
 正規サイトのログイン画面でログインを実施すると、正規サイトのポータル画面が表示されます。
 これは気づかない人は気づかないでしょうね・・・
-![](./arp-dns-spoofing-fake-website-credential-theft-images/img07.png)
+![](脆弱性/arp-dns-spoofing-fake-website-credential-theft-images/img07.png)
 

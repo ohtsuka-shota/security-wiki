@@ -16,7 +16,7 @@ source: "https://qiita.com/ohtsuka-shota/items/6f7b71568ac6810383d2"
 # 環境イメージ
 今回は以下のような環境になります。
 上記記事はOpenLDAP/Kerberosが乗っているサーバに対してそれらが管理しているユーザでログインが出来ることを確認しました。今回はOpenLDAP/Kerberosが稼働しているサーバではないサーバに対してSSH/RDP/Thunderbirdによるログイン・操作をする環境をどうやって用意するのかをまとめます。
-![](./sssd-openldap-kerberos-unified-auth-images/img01.png)
+![](環境構築/sssd-openldap-kerberos-unified-auth-images/img01.png)
 
 # 環境構築
 ## メールサーバ（Ubuntu24.04）へのSSH接続
@@ -147,15 +147,15 @@ testuser
 
 ## 動作確認
 自分のローカルPCからそれぞれのメールサーバにOpenLDAP/Kerberosで管理しているユーザでTeratermでログインします。問題なくログイン出来るはずです。
-![](./sssd-openldap-kerberos-unified-auth-images/img02.png)
+![](環境構築/sssd-openldap-kerberos-unified-auth-images/img02.png)
 
 ## Thunderbirdでのメールアカウントログイン
 Thunderbirdを起動します。
 名前にOpenLDAP/Kerberosで管理しているアカウント、メールアドレスに左記アカウント@ドメインを入力します。その後手動設定を押下します。
-![](./sssd-openldap-kerberos-unified-auth-images/img03.png)
+![](環境構築/sssd-openldap-kerberos-unified-auth-images/img03.png)
 
 IMAPを選択した状態でアカウントをセットアップボタンを押下します。
-![](./sssd-openldap-kerberos-unified-auth-images/img04.png)
+![](環境構築/sssd-openldap-kerberos-unified-auth-images/img04.png)
 
 以下の設定画面が表示されます。
 私の今のメールサーバの環境では以下のように設定していきます。
@@ -174,15 +174,15 @@ IMAPを選択した状態でアカウントをセットアップボタンを押�
 - 接続の保護: 上記と同様
 - 認証方式: 通常のパスワード認証
 - ユーザー名: testuser（OpenLDAP/Kerberosで管理しているユーザ）
-![](./sssd-openldap-kerberos-unified-auth-images/img05.png)
+![](環境構築/sssd-openldap-kerberos-unified-auth-images/img05.png)
 
 アカウントが見つかって正しいパスワードを入力すると、Thunderbird上でログインができるはずです。
-![](./sssd-openldap-kerberos-unified-auth-images/img06.png)
+![](環境構築/sssd-openldap-kerberos-unified-auth-images/img06.png)
 
 ## 動作確認
 OpenLDAP/Kerberosで管理しているユーザからもう一方のメールサーバにメールを送付します。
 結果は以下のように遅れていることから問題なさそうです。
-![](./sssd-openldap-kerberos-unified-auth-images/img07.png)
+![](環境構築/sssd-openldap-kerberos-unified-auth-images/img07.png)
 
 ## Ubuntu DesktopへのRDP接続（ubuntu24.04）
 XRDPでRDP接続できる環境である場合、基本的にはSSH接続の時と設定手順は変わりません。
@@ -312,7 +312,7 @@ testuser
 ## 動作確認
 自分のローカルPCからUbuntu DesktopにOpenLDAP/Kerberosで管理しているユーザでRDPでログインします。問題なくログイン出来るはずです。
 DesktopだろうがServerだろうが同じ手順でOpenLDAP/Kerberos管理に持っていけるのはありがたいですね。
-![](./sssd-openldap-kerberos-unified-auth-images/img08.png)
+![](環境構築/sssd-openldap-kerberos-unified-auth-images/img08.png)
 
-![](./sssd-openldap-kerberos-unified-auth-images/img09.png)
+![](環境構築/sssd-openldap-kerberos-unified-auth-images/img09.png)
 

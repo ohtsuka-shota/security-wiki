@@ -22,16 +22,16 @@ Certbotが証明書の更新処理の前後に任意のスクリプトを実行�
 - **deploy-hook**: 証明書の更新が成功した場合のみ実行される（例: S3へのアップロード）
 
 ※Felo AIで生成
-![](./ssl-cert-short-lifetime-acme-http01-images/img01.png)
+![](対策/ssl-cert-short-lifetime-acme-http01-images/img01.png)
 
 
 # 環境イメージ
-![](./ssl-cert-short-lifetime-acme-http01-images/img02.png)
+![](対策/ssl-cert-short-lifetime-acme-http01-images/img02.png)
 
 # 構築
 ## S3
 S3はDNS-01で使用したacme-s3-dev-ohtsuka-aws-xyzというバケットを流用します。
-![](./ssl-cert-short-lifetime-acme-http01-images/img09.png)
+![](対策/ssl-cert-short-lifetime-acme-http01-images/img09.png)
 
 ## EC2での設定
 RHEL9系でEC2を構築します。
@@ -45,7 +45,7 @@ Failed to enable unit: Unit file snapd.socket does not exist.
 
 IAM RoleについてはS3へのFullAccessを与えたRoleを紐づけてます。
 ※本番環境では最小権限に沿って絞ってください。
-![](./ssl-cert-short-lifetime-acme-http01-images/img03.png)
+![](対策/ssl-cert-short-lifetime-acme-http01-images/img03.png)
 
 EC2にSSH出来たら以下を実行しておきます。
 ```
@@ -206,7 +206,7 @@ If you like Certbot, please consider supporting our work by:
 ```
 
 S3へのアップロードもうまくいきました。
-![](./ssl-cert-short-lifetime-acme-http01-images/img05.png)
+![](対策/ssl-cert-short-lifetime-acme-http01-images/img05.png)
 
 証明書がある状態でもう一度取得しようとすると「まだ有効な証明書があるけど再取得するんか？」と聞かれます。今回は1を選択して、再取得は控えました。
 ```
@@ -234,7 +234,7 @@ HTTP-01はHTTPで0.0.0.0/0のインバウンドを許可しないといけない
 そこでHTTP-01の時だけHTTPを開けるという方法が取れると思います。
 
 EC2に設定しているIAM RoleにSGを変更するための権限を付与します。EC2FullAccessをアタッチします。
-![](./ssl-cert-short-lifetime-acme-http01-images/img06.png)
+![](対策/ssl-cert-short-lifetime-acme-http01-images/img06.png)
 
 スクリプトを準備します。SGを開けるときのスクリプトは以下です。
 ```
@@ -272,10 +272,10 @@ echo "SG Closed: $(date)" >> /var/log/certbot_sg.log
 
 ## 動作確認
 EC2のSGからHTTPのインバウンドを外しておきます。
-![](./ssl-cert-short-lifetime-acme-http01-images/img07.png)
+![](対策/ssl-cert-short-lifetime-acme-http01-images/img07.png)
 
 S3からも先ほど取得した証明書を削除しておきます。
-![](./ssl-cert-short-lifetime-acme-http01-images/img08.png)
+![](対策/ssl-cert-short-lifetime-acme-http01-images/img08.png)
 
 この状態で以下のコマンドを実行します。
 証明書の取得前後でSGの開閉が行われています。
@@ -349,7 +349,7 @@ Renewing an existing certificate... と表示され、Let's Encryptの認証を�
 
 S3にも証明書がアップロードされています。
 問題なさそうですね。処理時間が数十秒と極めて短いため、サイバーキルチェーンの各フェーズを考慮すれば、この時間内に攻撃を成立させることは極めて困難と言えるでしょう。
-![](./ssl-cert-short-lifetime-acme-http01-images/img09.png)
+![](対策/ssl-cert-short-lifetime-acme-http01-images/img09.png)
 
 この処理をCrontabで設定しておくと自動化達成の一助になるでしょう。
 ```

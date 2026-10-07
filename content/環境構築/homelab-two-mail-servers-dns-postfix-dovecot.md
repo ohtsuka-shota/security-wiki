@@ -21,16 +21,16 @@ source: "https://qiita.com/ohtsuka-shota/items/b977a3acb56ad587f264"
 - TLS証明書なしの検証環境（本番では非推奨）
 
 # 全体環境イメージ
-![](./homelab-two-mail-servers-dns-postfix-dovecot-images/img01.png)
+![](環境構築/homelab-two-mail-servers-dns-postfix-dovecot-images/img01.png)
 
 # 環境構築
 ## Ubuntu Desktopの環境整備
 Thunderbirdを導入します。アプリセンターから導入が便利そうです。
 ここからインストールするだけであとは何もせずに起動することが出来ます。
-![](./homelab-two-mail-servers-dns-postfix-dovecot-images/img02.png)
+![](環境構築/homelab-two-mail-servers-dns-postfix-dovecot-images/img02.png)
 
 次にこのDesktopが参照するDNSをホームラボで作っているDNSに指定します。
-![](./homelab-two-mail-servers-dns-postfix-dovecot-images/img03.png)
+![](環境構築/homelab-two-mail-servers-dns-postfix-dovecot-images/img03.png)
 
 **mDNS (Multicast DNS) の無効化について**
 
@@ -469,18 +469,18 @@ Name:	mail.test02.local
 Address: 192.168.0.32
 ```
 
-![](./homelab-two-mail-servers-dns-postfix-dovecot-images/img04.png)
+![](環境構築/homelab-two-mail-servers-dns-postfix-dovecot-images/img04.png)
 
 次にThunderbirdでそれぞれのメールアカウントにドメインでログイン出来ることを確認します。
 ユーザ名：test
 メールアドレス：test@test01.localと入力し続けるボタンを押下します。
-![](./homelab-two-mail-servers-dns-postfix-dovecot-images/img05.png)
+![](環境構築/homelab-two-mail-servers-dns-postfix-dovecot-images/img05.png)
 
 名前解決などの通信が問題なければ恐らく対象メールサーバでユーザが見つかり、後続の処理が走るはずです。
-![](./homelab-two-mail-servers-dns-postfix-dovecot-images/img06.png)
+![](環境構築/homelab-two-mail-servers-dns-postfix-dovecot-images/img06.png)
 
 test01.localとtest02.localのメールアカウントにThunderboltでログイン出来ました。
-![](./homelab-two-mail-servers-dns-postfix-dovecot-images/img07.png)
+![](環境構築/homelab-two-mail-servers-dns-postfix-dovecot-images/img07.png)
 
 ## メール送受信確認
 それぞれのメールサーバにログインできましたので、送受信手素を行っていきたいと思います。
@@ -490,26 +490,26 @@ test01.localとtest02.localのメールアカウントにThunderboltでログイ
 選択したサーバのポートが25になっています。これを587にします。
 また、検証環境用に接続の保護をSTARTTLSからなしに変更します。
 画面右の編集ボタンから編集することが出来ます。
-![](./homelab-two-mail-servers-dns-postfix-dovecot-images/img08.png)
+![](環境構築/homelab-two-mail-servers-dns-postfix-dovecot-images/img08.png)
 
 編集を実行すると、このように表記が変わります。
-![](./homelab-two-mail-servers-dns-postfix-dovecot-images/img09.png)
+![](環境構築/homelab-two-mail-servers-dns-postfix-dovecot-images/img09.png)
 
 
 
 ### test@test01.local⇒test@test02.localへの送付
 画面左のtest01.local上のユーザからメールを送信し、test02.local上のユーザにメールが正常に飛んでいくことを確認します。
-![](./homelab-two-mail-servers-dns-postfix-dovecot-images/img10.png)
+![](環境構築/homelab-two-mail-servers-dns-postfix-dovecot-images/img10.png)
 
 結果正常に送受信できていることがわかりました。
-![](./homelab-two-mail-servers-dns-postfix-dovecot-images/img11.png)
+![](環境構築/homelab-two-mail-servers-dns-postfix-dovecot-images/img11.png)
 
 ### test@test02.local⇒test@test01.localへの送付
 今度は逆に、画面右のtest02.local上のユーザからメールを送信し、test01.local上のユーザにメールが正常に飛んでいくことを確認します。
-![](./homelab-two-mail-servers-dns-postfix-dovecot-images/img12.png)
+![](環境構築/homelab-two-mail-servers-dns-postfix-dovecot-images/img12.png)
 
 こちらも、結果正常に送受信できていることがわかりました。
-![](./homelab-two-mail-servers-dns-postfix-dovecot-images/img13.png)
+![](環境構築/homelab-two-mail-servers-dns-postfix-dovecot-images/img13.png)
 
 
 ## まとめ

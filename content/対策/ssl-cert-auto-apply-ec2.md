@@ -12,7 +12,7 @@ source: "https://qiita.com/ohtsuka-shota/items/9b6f7830b56e35cecbe0"
 
 # 環境イメージ
 
-![](./ssl-cert-auto-apply-ec2-images/img01.png)
+![](対策/ssl-cert-auto-apply-ec2-images/img01.png)
 
 # 用語
 ## aws s3 sync
@@ -22,7 +22,7 @@ S3とローカルの差分があるファイルだけをダウンロードする
 EC2にAWSサービスへのアクセス権を付与する仕組み。アクセスキーをサーバ上に置く必要がなくなるため、キーの漏洩リスクを排除できる。
 
 ※Felo AIで生成。一部文字がシャギーですが治らないので…💦
-![](./ssl-cert-auto-apply-ec2-images/img02.jpeg)
+![](対策/ssl-cert-auto-apply-ec2-images/img02.jpeg)
 
 ## mod_ssl
 ApacheでSSL/TLSを有効にするためのモジュール。これをインストールすることでApacheがHTTPS通信を処理できるようになる。
@@ -34,25 +34,25 @@ Apacheで1台のサーバ上に複数のサイトを運用するための設定�
 `reload` は設定ファイルを再読み込みするだけで既存の接続を切らない。`restart` は一度サービスを停止してから再起動するため、接続中のユーザに影響が出る。証明書更新時に `reload` を使っているのはサービス断を避けるため。
 
 ※Felo AIで生成
-![](./ssl-cert-auto-apply-ec2-images/img03.png)
+![](対策/ssl-cert-auto-apply-ec2-images/img03.png)
 
 # 手順
 ## 検証用サーバの準備
 今回の検証用サーバはEC2（RHEL9）で構築します。
 インスタンスタイプはt3.micro。Diskはデフォルトの10GB。
 SGはSSH,HTTP,HTTPS。パブリックサブネットに立ち上げます。
-![](./ssl-cert-auto-apply-ec2-images/img04.png)
+![](対策/ssl-cert-auto-apply-ec2-images/img04.png)
 
 このEC2からS3に対して証明書を取得するようにしたいので、EC2にS3へのアクセス権を設定する必要があります。
 その為のIAM Roleを作る必要があります。AWSのサービスからEC2を選択して次に進みます。
-![](./ssl-cert-auto-apply-ec2-images/img05.png)
+![](対策/ssl-cert-auto-apply-ec2-images/img05.png)
 
 Roleの名前はacme-ec2-roleとしました。S3FullAccessポリシをアタッチして作成します。
 ※本番環境時はS3を指定して、データの取得だけ出来るように調整するのが良いでしょう。
-![](./ssl-cert-auto-apply-ec2-images/img06.png)
+![](対策/ssl-cert-auto-apply-ec2-images/img06.png)
 
 立ち上げたEC2にアタッチします。
-![](./ssl-cert-auto-apply-ec2-images/img07.png)
+![](対策/ssl-cert-auto-apply-ec2-images/img07.png)
 
 EC2にSSH接続し、AWS CLIをインストールします。
 インストール後、aws --versionと実行して出力がかえってくればインストールは成功です。
@@ -78,7 +78,7 @@ Apacheをインストールします。
 [root@ip-10-0-0-223 ~]# systemctl start httpd
 ```
 WebブラウザにEC2にアクセスして以下のようなページが表示されればインストール成功です。
-![](./ssl-cert-auto-apply-ec2-images/img08.png)
+![](対策/ssl-cert-auto-apply-ec2-images/img08.png)
 
 次にmod_sslをインストールします。
 SSL化するためです。
@@ -179,13 +179,13 @@ download: s3://acme-s3-dev-ohtsuka-aws-xyz/certificates/dev.ohtsuka-aws.xyz/full
 
 改めてEC2にWebブラウジング（https）すると以下のように証明書を読み込んでいるのを確認できます。
 ※証明書のドメインを読み込めていますが、IPアドレスでアクセスしているのでURIに警告が出ていますが、想定内です。
-![](./ssl-cert-auto-apply-ec2-images/img09.png)
+![](対策/ssl-cert-auto-apply-ec2-images/img09.png)
 
 Route53にAレコードを作成して、EC2のIPアドレスを指定します。
-![](./ssl-cert-auto-apply-ec2-images/img10.png)
+![](対策/ssl-cert-auto-apply-ec2-images/img10.png)
 
 https\://サーバのドメイン名でWebブラウジングをすると先ほどのURIへの警告が表示されません。
-![](./ssl-cert-auto-apply-ec2-images/img11.png)
+![](対策/ssl-cert-auto-apply-ec2-images/img11.png)
 
 スクリプトを何度か実行してみます。
 ログに更新がされていないので、S3から引っ張ってきてないことがわかります。
@@ -233,7 +233,7 @@ Nginxをインストールして起動します。
 
 WebブラウザでEC2にアクセスします。
 Apacheの時とあまり違いが無いようですが、Nginxという表記が右下にあればOKです。
-![](./ssl-cert-auto-apply-ec2-images/img12.png)
+![](対策/ssl-cert-auto-apply-ec2-images/img12.png)
 
 スクリプトの内容を書き換えます。
 とはいってもApacheという表記をNginxという表記に買えただけですが。。。
@@ -318,7 +318,7 @@ download: s3://acme-s3-dev-ohtsuka-aws-xyz/certificates/dev.ohtsuka-aws.xyz/priv
 
 https\://ドメイン名でアクセスすると証明書を読み込んでいることがわかります。
 問題なさそうですね。
-![](./ssl-cert-auto-apply-ec2-images/img13.png)
+![](対策/ssl-cert-auto-apply-ec2-images/img13.png)
 
 何度か実行してもS3に更新がかかっていないので、ダウンロードなど行っていないことがわかります。
 処理フローはApacheの時と同様です。

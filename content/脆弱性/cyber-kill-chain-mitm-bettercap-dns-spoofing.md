@@ -67,7 +67,7 @@ DNS応答を偽装して、正規のドメイン名に対して攻撃者が用�
 # 環境構成
 ## 全体構成
 緑が正規通信フロー、赤がスプーフィングの結果行われる偽装通信フローになります。
-![](./cyber-kill-chain-mitm-bettercap-dns-spoofing-images/img01.png)
+![](脆弱性/cyber-kill-chain-mitm-bettercap-dns-spoofing-images/img01.png)
 
 ## 攻撃対象環境
 以下の手順でubutnuを使用してDesktop環境とDNSサーバ周り、Webサーバの環境を整えています。
@@ -114,7 +114,7 @@ bettercap v2.41.5 (built for linux amd64 with go1.24.9) [type 'help' for a list 
 net.showで結果を確認できます。
 結果を見ている感じ、間違いはないように見えます。
 net.probe onを実行したすぐにこれをやると、見つかってないデバイスがある可能性があるので、2,3分待ってから行うと良い気がします。
-![image.png](./cyber-kill-chain-mitm-bettercap-dns-spoofing-images/img02.png)
+![image.png](脆弱性/cyber-kill-chain-mitm-bettercap-dns-spoofing-images/img02.png)
 
 ## 【MITM/中間者攻撃】ターゲットを指定してARPスプーフィングを行う（失敗）
 以下のコマンドを実行してターゲットに対してARPスプーフィングを仕掛けます。IPアドレスは攻撃対象のIPアドレスを指定します。
@@ -128,7 +128,7 @@ net.probe onを実行したすぐにこれをやると、見つかってない�
 
 攻撃対象側でip neighを実行します。
 arpスプーフが実行されていないとデフォルトゲートウェイ（xxx.xxx.xxx.1）のMACが正しいものとなっています。今回は"00:10:18:xx:xx:xx"です
-![image.png](./cyber-kill-chain-mitm-bettercap-dns-spoofing-images/img03.png)
+![image.png](脆弱性/cyber-kill-chain-mitm-bettercap-dns-spoofing-images/img03.png)
 
 この状態で例えば外に抜ける通信を発生させます。
 こうすることでMACがkaliのものに書き換わりARPスプーフィングが完成するはずです。
@@ -138,7 +138,7 @@ ping 8.8.8.8
 
 実行結果は以下です。書き換わってないので失敗してます。
 依然として192.168.0.1 dev ens18 lladdr 00:10:18:xx:xx:xx REACHABLEとなっています。
-![image.png](./cyber-kill-chain-mitm-bettercap-dns-spoofing-images/img04.png)
+![image.png](脆弱性/cyber-kill-chain-mitm-bettercap-dns-spoofing-images/img04.png)
 
 
 ## 【MITM/中間者攻撃】ARPスプーフィングの失敗に対する対応 ※全部うまくいかなかった
@@ -207,7 +207,7 @@ Linuxカーネルには、セキュリティ保護のため「自分が要求し
 
 ### ARPスプーフィングの実行結果確認
 これらの対応を施してみましたが、ARPスプーフィングはうまくいきませんでした。
-![image.png](./cyber-kill-chain-mitm-bettercap-dns-spoofing-images/img05.png)
+![image.png](脆弱性/cyber-kill-chain-mitm-bettercap-dns-spoofing-images/img05.png)
 
 kaliのMACは以下になります。うまくいっておりません。
 かなり堅牢のように思います。
@@ -299,10 +299,10 @@ resolvectl flush-cachesでキャッシュを消した後nslookupを仕掛けま�
 192.168.0.0/24 > 192.168.0.25  » [16:24:35] [sys.log] [inf] dns.spoof sending spoofed DNS reply for www.example.com (->192.168.0.25) to 192.168.0.62 : bc:24:11:15:1d:4f (Proxmox Server Solutions GmbH).
 192.168.0.0/24 > 192.168.0.25  » [16:24:35] [sys.log] [inf] dns.spoof sending spoofed DNS reply for www.example.com (->192.168.0.25) to 192.168.0.62 : bc:24:11:15:1d:4f (Proxmox Server Solutions GmbH).
 ```
-![](./cyber-kill-chain-mitm-bettercap-dns-spoofing-images/img06.png)
+![](脆弱性/cyber-kill-chain-mitm-bettercap-dns-spoofing-images/img06.png)
 
 Firefox側で通信を行います。正しいWebサーバではなくKaliで実行しているダミーのWebサイトに飛んでいることがわかります。
-![](./cyber-kill-chain-mitm-bettercap-dns-spoofing-images/img07.png)
+![](脆弱性/cyber-kill-chain-mitm-bettercap-dns-spoofing-images/img07.png)
 
 例えばこの状態でkali側でApacheを導入して本物を模倣したHTMLファイルを用意したうえでサイト公開をしてみます。
 ```
@@ -316,5 +316,5 @@ systemctl restart apache2
 ```
 
 ターゲットで確認します。正規ドメインでアクセスしていますが、攻撃者が用意したWebページにアクセスしてしまっていることがわかります。
-![](./cyber-kill-chain-mitm-bettercap-dns-spoofing-images/img08.png)
+![](脆弱性/cyber-kill-chain-mitm-bettercap-dns-spoofing-images/img08.png)
 

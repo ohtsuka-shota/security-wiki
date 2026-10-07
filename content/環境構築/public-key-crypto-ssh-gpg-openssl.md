@@ -18,7 +18,7 @@ source: "https://qiita.com/ohtsuka-shota/items/e621b659056f86c26313"
 公開鍵暗号方式では、専用のソフトウェアを使って公開鍵と秘密鍵のペアを自動生成します。例えば、SSHではssh-keygenコマンド、GitHubなどのリポジトリ認証やコミット署名ではGnuPG（GPG）、SSL/TLS証明書ではOpenSSLなどが使われます。生成後は、公開鍵をサーバーやウェブサイトで公開し、秘密鍵は安全な場所（パスワードで保護されたファイルや専用デバイスなど）に保管します。
 
 ※FeloAIで生成
-![](./public-key-crypto-ssh-gpg-openssl-images/img01.png)
+![](環境構築/public-key-crypto-ssh-gpg-openssl-images/img01.png)
 
 ## 公開鍵暗号方式を使う4つのパターン
 もうちょっとあるかもですが、基本この4つのパターンになります。
@@ -29,7 +29,7 @@ GnuPGの例： 相手の公開鍵（南京錠）を借りてきて、ファイ�
 ポイント： 相手の「秘密鍵」でしか開けられないから、途中で盗まれても安心。
 
 ※FeloAIで生成
-![](./public-key-crypto-ssh-gpg-openssl-images/img02.png)
+![](環境構築/public-key-crypto-ssh-gpg-openssl-images/img02.png)
 
 ### SSH接続（「お前は誰だ？」の認証）
 目的： サーバーに安全にログインすること。
@@ -44,7 +44,7 @@ EC2の例： AWSからダウンロードした .pem（秘密鍵）を使って�
 **サーバーが公開鍵を持つ理由：** クライアントの身元を確認するため（公開鍵なので漏れても問題ない）
 
 ※FeloAIで生成
-![](./public-key-crypto-ssh-gpg-openssl-images/img03.png)
+![](環境構築/public-key-crypto-ssh-gpg-openssl-images/img03.png)
 
 ### デジタル署名（「本当にお前が書いたのか？」の証明）
 目的： データが本人によって作成され、改ざんされていないことを証明すること。
@@ -54,7 +54,7 @@ Gitの例： 自分の秘密鍵でコミットに署名し、他の人が公開�
 データ自体は暗号化されない（誰でも読める）。実際には「ハッシュ値を秘密鍵で暗号化したもの」が署名です。受信者は公開鍵でそれを復号し、自分で計算したハッシュ値と比較します。一致すれば「改ざんされていない」「本人が作成した」と確認できます。
           
 ※FeloAIで生成
-![](./public-key-crypto-ssh-gpg-openssl-images/img04.png)
+![](環境構築/public-key-crypto-ssh-gpg-openssl-images/img04.png)
 
 ### SSL/TLS証明書（「本当にそのサーバーか？」の証明）
 目的：Webサーバーが本物であることを証明し、通信を暗号化
@@ -110,7 +110,7 @@ https://bigdrea6.hatenablog.com/entry/2022/02/25/160639
 
 ※ハッシュ値が偶然一致してしまう「衝突（コリジョン）」が起こる確率は、使用するハッシュ関数のビット長（出力される文字列の長さ）と、生成するデータの数によって決まるようです。SHA-256というハッシュ関数がハッシュ値のパターンは、2の256乗とのこと。つまり異なるデータが偶然同じハッシュ値になる確率は2の256乗分の1。実質0に限りなく等しいという事が言えます。宝くじの1等に当籤する確率が1000万分の1らしいので、それを考えても途方もない数値であると言えるでしょう。
 
-![](./public-key-crypto-ssh-gpg-openssl-images/img05.png)
+![](環境構築/public-key-crypto-ssh-gpg-openssl-images/img05.png)
 
 ## ハッシュ関数の種類
 ### MD5 (Message Digest 5)
@@ -130,12 +130,12 @@ SHA-2に未知の脆弱性が発見された場合のリスクヘッジとして
 
 
 ※Felo AIで生成
-![](./public-key-crypto-ssh-gpg-openssl-images/img06.png)
+![](環境構築/public-key-crypto-ssh-gpg-openssl-images/img06.png)
 
 ## 暗号化とハッシュ化の整理
 「誰かに安全にデータを届けたい（後で読みたい）」場合は暗号化を使い、「データが正しいか（改ざんされていないか）だけを確認したい」場合はハッシュ化を使う
 ※Felo AIで生成
-![](./public-key-crypto-ssh-gpg-openssl-images/img07.jpeg)
+![](環境構築/public-key-crypto-ssh-gpg-openssl-images/img07.jpeg)
 
 # 実機検証
 ## 環境準備
@@ -203,7 +203,7 @@ The key's randomart image is:
 -rw-r--r-- 1 test test  393  5月  9 09:31 test_key.pub
 ```
 
-![](./public-key-crypto-ssh-gpg-openssl-images/img08.png)
+![](環境構築/public-key-crypto-ssh-gpg-openssl-images/img08.png)
 
 
 fingerprintについては、公開鍵をハッシュ化したものであるという事なので、元の公開鍵も見ておきます。これに処理を加えた結果がfingerprintの"SHA256:B0GiBAnmAXzRcQGqDqFzf0RJ7+/kC4IgIOM+oo5qomE test@client"になるという事です。
@@ -278,7 +278,7 @@ target
 ```
 
 また、接続に成功すると.ssh/配下にknown_hostsファイルが生成されます。
-![](./public-key-crypto-ssh-gpg-openssl-images/img09.png)
+![](環境構築/public-key-crypto-ssh-gpg-openssl-images/img09.png)
 
 中身は以下のようになっています。
 known_hostsには「ハッシュ化されたホスト名 + サーバーの公開鍵」が記録されます。
@@ -354,7 +354,7 @@ sub   rsa3072 2026-05-09 [E] [有効期限: 2027-05-09]
 ```
 
 GUI環境で作っている場合、パスフレーズを設定する際に以下のような画面が表示されます。
-![](./public-key-crypto-ssh-gpg-openssl-images/img10.png)
+![](環境構築/public-key-crypto-ssh-gpg-openssl-images/img10.png)
 
 GPGキー作成が完了すると.gnupgディレクトリが作成され、その中に鍵が生成されます。
 - **pubring.kbx:** 「公開鍵の鍵束（キーリング）」です。自分自身の公開鍵だけでなく、インポートした他人の公開鍵もすべてこのバイナリファイルに保存されます。
@@ -381,12 +381,12 @@ drwx------ 2 test test 4096  5月  9 10:25 private-keys-v1.d
 -rw------- 1 test test 3105  5月  9 10:25 22774C6320888CD05AE50812C229FD02E4BBAF6F.key
 -rw------- 1 test test 3105  5月  9 10:25 5700C317CBA6AC160FA3FB9BD5C79A62BACC00FD.key
 ```
-![](./public-key-crypto-ssh-gpg-openssl-images/img11.png)
+![](環境構築/public-key-crypto-ssh-gpg-openssl-images/img11.png)
 
 **trustdb.gpgとD60~.revについて**
-![](./public-key-crypto-ssh-gpg-openssl-images/img12.png)
+![](環境構築/public-key-crypto-ssh-gpg-openssl-images/img12.png)
 
-![](./public-key-crypto-ssh-gpg-openssl-images/img13.png)
+![](環境構築/public-key-crypto-ssh-gpg-openssl-images/img13.png)
 
 秘密鍵しか生成されていないので、targetに送る用の公開鍵を作成します。
 `gpg --armor --export test@example.com > ~/test_client_public_gpg_key.asc`は「特定のメールアドレスに関連付けられたGPG公開鍵を、テキスト形式でファイルに書き出す」操作になります。
@@ -420,7 +420,7 @@ TWA9lPdP7+aEJL6Tr5JW9LX/zdej59/Y74MBuQYecVEbQjsZKTfUQAJomn6I0B0k
 =jbkK
 -----END PGP PUBLIC KEY BLOCK-----
 ```
-![](./public-key-crypto-ssh-gpg-openssl-images/img14.png)
+![](環境構築/public-key-crypto-ssh-gpg-openssl-images/img14.png)
 
 GPGキーの準備が出来たので、テストファイルを作成してそれに対して署名を行います。
 署名をするタイミングでパスフレーズを求められるので、設定しているパスフレーズを入力します。署名が正常に行われると、ファイル名.ascファイルが作成されます。
@@ -468,7 +468,7 @@ test_client_public_gpg_key.asc                100% 2460     3.7MB/s   00:00
 ```
 
 target側でファイルがあることを確認します。
-![](./public-key-crypto-ssh-gpg-openssl-images/img15.png)
+![](環境構築/public-key-crypto-ssh-gpg-openssl-images/img15.png)
 
 target側で検証します。
 まず、GPG公開鍵をインポートします。
@@ -558,7 +558,7 @@ yWy82AJKI30qCZ4Sf3L/WE5l7puhmTwreGqeufYN3RkJAgMBAAE=
 -----END PUBLIC KEY-----
 ```
 
-![](./public-key-crypto-ssh-gpg-openssl-images/img16.png)
+![](環境構築/public-key-crypto-ssh-gpg-openssl-images/img16.png)
 
 作成した鍵のうち、公開鍵をtargetに送ります。
 ```
@@ -575,7 +575,7 @@ snap              thinclient_drives               ドキュメント  公開
 test_GPG.txt      ダウンロード                    ビデオ
 test_GPG.txt.asc  テンプレート                    ピクチャ
 ```
-![](./public-key-crypto-ssh-gpg-openssl-images/img17.png)
+![](環境構築/public-key-crypto-ssh-gpg-openssl-images/img17.png)
 
 テストファイルを作成してそのファイルを受け取った公開鍵で暗号化します。
 - **rsautl:** RSA鍵を使用して暗号化、復号、署名、検証などを行うためのサブコマンド ※pkeyutlを使用するのが推奨になった様子。
@@ -595,7 +595,7 @@ test@target:~$ ls -lh test_OPENSSL.txt
 test@target:~$ openssl rsautl -encrypt -pubin -inkey public_key.pem  -in test_OPENSSL.txt -out secret_test_OPENSSL.txt
 The command rsautl was deprecated in version 3.0. Use 'pkeyutl' instead.
 ```
-![](./public-key-crypto-ssh-gpg-openssl-images/img18.png)
+![](環境構築/public-key-crypto-ssh-gpg-openssl-images/img18.png)
 
 この鍵をclient側に持っていきます。
 ```
@@ -611,7 +611,7 @@ secret_test_OPENSSL.txt                       100%  384   819.1KB/s   00:00
 
 ### client側 復号化
 暗号化されたファイルがあることを確認します。
-![](./public-key-crypto-ssh-gpg-openssl-images/img19.png)
+![](環境構築/public-key-crypto-ssh-gpg-openssl-images/img19.png)
 
 これを秘密鍵を使って復号化します。
 復号化されたファイル、test_OPENSSL.txtを確認すると開けることがわかります。
@@ -624,7 +624,7 @@ test@client:~/openssl$ ls
 private_key.pem  secret_test_OPENSSL.txt  test_OPENSSL.txt
 public_key.pem   test@192.168.0.62
 ```
-![](./public-key-crypto-ssh-gpg-openssl-images/img20.png)
+![](環境構築/public-key-crypto-ssh-gpg-openssl-images/img20.png)
 
 ### 参考：pkeyutlのサンプルコマンド
 ```

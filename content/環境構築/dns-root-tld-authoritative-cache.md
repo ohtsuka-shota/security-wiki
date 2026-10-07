@@ -683,13 +683,13 @@ root@cache-dns:~# systemctl restart bind9
 
 改めて名前解決を行います。まずはwww.example.com。
 私の方で作成しているページが表示されているので問題なさそうです。
-![](./dns-root-tld-authoritative-cache-images/img01.png)
+![](環境構築/dns-root-tld-authoritative-cache-images/img01.png)
 
 続いてパブリックドメイン。今回はyoutube.comにします。
 いつものYoutubeが表示されているので、これも問題なさそうです。
-![](./dns-root-tld-authoritative-cache-images/img02.png)
+![](環境構築/dns-root-tld-authoritative-cache-images/img02.png)
 
 フローのイメージは以下のようになります。
 赤が今回追加した分岐フローです。
-![](./dns-root-tld-authoritative-cache-images/img03.png)
+![](環境構築/dns-root-tld-authoritative-cache-images/img03.png)
 

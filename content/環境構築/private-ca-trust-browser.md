@@ -14,9 +14,9 @@ source: "https://qiita.com/ohtsuka-shota/items/fdff441094f8fcae6bf5"
 # 前提：プライベートCAの証明書を使っているサーバにアクセスすると
 エンジニアとして働いているとよく見る（？）光景だと思いますが公に信頼されていないプライベートCAの証明書を使っているWebサイトにアクセスすると以下のような画面が表示されます。
 Web画面にも"SEC ERROR UNKNOWN ISSUER"書いている通り、信頼されていない認証局が証明書を発行しているという警告を出しています。
-![](./private-ca-trust-browser-images/img01.png)
+![](環境構築/private-ca-trust-browser-images/img01.png)
 
-![](./private-ca-trust-browser-images/img02.jpeg)
+![](環境構築/private-ca-trust-browser-images/img02.jpeg)
 
 この警告が出ているタイミングで、クライアントはサーバが使っている証明書（公開鍵付）を受け取っており、暗号化通信を開始しています。この警告は暗号化通信をするにあたり必要な公開鍵を証明している証明元がおかしいという事を示しています。
 
@@ -25,13 +25,13 @@ Web画面にも"SEC ERROR UNKNOWN ISSUER"書いている通り、信頼されて
 
 少し脱線しますが、Certificateの下にCertificate Verifyがありますが、Verify（検証するという意味）なので矢印がサーバからクライアントに向いているのはおかしくないかと感じました。しかし、どうやらこの通信で【サーバからクライアントに対して自分は本当にこの証明書の持ち主です】という事を証明するためのデータ（これより前のやり取り全体のハッシュ値に対してサーバの秘密鍵で署名したもの）を渡しているようで、これをクライアントは、Certificateで受け取った公開鍵を使って、この署名を検証しています。なのでこの向きで良いようです。
 
-![](./private-ca-trust-browser-images/img03.png)
+![](環境構築/private-ca-trust-browser-images/img03.png)
 
-![](./private-ca-trust-browser-images/img04.png)
+![](環境構築/private-ca-trust-browser-images/img04.png)
 
 Firefoxに表示されている危険性を承知の上で使用を押下すると、相手のWebサーバと暗号化通信をした上でサイトをブラウジングします。クライアント-サーバ間で通信暗号化は出来ております。
 再三になりますが、証明書を発行している発行元が信頼できない状態なので通信相手が100%間違いないという事に対して確証が持てない場合機密情報等は入力しない方が良いでしょう。
-![](./private-ca-trust-browser-images/img05.png)
+![](環境構築/private-ca-trust-browser-images/img05.png)
 
 # 対応：プライベートCAの証明書を信頼できるものとして証明書ストアに登録する
 「このサーバ大丈夫か」という事をブラウザ側で表示させないようにする、つまりプライベートCAは信頼して大丈夫だという事を教えます。
@@ -83,20 +83,20 @@ ca-cert.pem                               100%[=================================
 
 Firefoxの場合、右上のハンバーガーメニュー > 設定 > プライバシーとセキュリティの流れで遷移して、下の方にスクロールすると証明書の項目があります。
 証明書を表示を押下します。
-![](./private-ca-trust-browser-images/img06.png)
+![](環境構築/private-ca-trust-browser-images/img06.png)
 
 認証局証明書のタブを開きます。インポートボタンを押下します。
 その後エクスプローラが開くので、プライベートCAからダウンロードした証明書を指定します。
-![](./private-ca-trust-browser-images/img07.png)
+![](環境構築/private-ca-trust-browser-images/img07.png)
 
 信頼するかのウィザードが表示されるので、ウェブサイトとメールユーザを信頼するように指定します。
 指定した後OKを押して証明書の画面を閉じます。
-![](./private-ca-trust-browser-images/img08.png)
+![](環境構築/private-ca-trust-browser-images/img08.png)
 
 Firefoxのタブを全部閉じて改めて接続すると警告が出ずに画面が表示されるはずです。
 注意としてMozillaが承認していない発行者の証明書で検証された接続ですと出ていますが、これはユーザで勝手にプライベートCAを証明書ストアに登録したのが原因です。
 ※もしこの時点でSSL_ERROR_BAD_CERT_DOMAINが出た場合は、末尾の備忘を参照してください
-![](./private-ca-trust-browser-images/img09.png)
+![](環境構築/private-ca-trust-browser-images/img09.png)
 
 # 備忘：SSL_ERROR_BAD_CERT_DOMAINエラー
 Webブラウジングをしている時に、SSL_ERROR_BAD_CERT_DOMAINというエラーコードではじかれたことがありました。これはSAN（Subject Alternative Name）がついてない状態でサーバ証明書を作ってしまったのが問題の様です。プライベートCAでサーバ証明書を作成して、それをWebサーバに噛ませる場合はSANは作っておいた方が間違いなく良いでしょう・・・

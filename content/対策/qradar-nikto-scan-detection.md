@@ -101,14 +101,14 @@ Enter a valueに50を入力して送信を押下します。
 ディスパッチされたイベントをオフェンスの一部にする：チェック
 オフェンスの検索付けの基準：送信元IP
 この設定を入れて終了を押下します。
-![](./qradar-nikto-scan-detection-images/img01.png)
+![](対策/qradar-nikto-scan-detection-images/img01.png)
 
 任意の文言を追加して、OKボタンを押下します。
 ![image.png](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/3219385/73825ee0-07c3-4d2e-80b5-f246e02968c5.png)
 
 元の画面に戻ります。
 画面上部に検索窓がありますので、Kali Linux Reconnaissance (Nikto)と検索すると、先ほどのルールが表示されると思います。
-![](./qradar-nikto-scan-detection-images/img02.png)
+![](対策/qradar-nikto-scan-detection-images/img02.png)
 
 ## 動作確認
 Kali Linuxで改めて攻撃対象に対してniktoを使ってWeb脆弱性を調査してみます。
@@ -153,16 +153,16 @@ QRadarで検知していることを確認します。
 ![image.png](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/3219385/76815be8-2a22-484b-84ba-8659ee85813b.png)
 
 フィルタに引っ掛かるイベントがあります。適当に押下します。
-![](./qradar-nikto-scan-detection-images/img03.png)
+![](対策/qradar-nikto-scan-detection-images/img03.png)
 
 詳細を見ると"Kali Linux Reconnaissance (Nikto)"で検知していることがわかります。
-![](./qradar-nikto-scan-detection-images/img04.png)
+![](対策/qradar-nikto-scan-detection-images/img04.png)
 
 オフェンスを確認してみます。
 Webスキャンでヒットしているものがあることがわかります。これをダブルクリックします。
-![](./qradar-nikto-scan-detection-images/img05.png)
+![](対策/qradar-nikto-scan-detection-images/img05.png)
 
 詳細は以下となります。
-![](./qradar-nikto-scan-detection-images/img06.png)
-![](./qradar-nikto-scan-detection-images/img07.png)
+![](対策/qradar-nikto-scan-detection-images/img06.png)
+![](対策/qradar-nikto-scan-detection-images/img07.png)
 
