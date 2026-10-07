@@ -114,6 +114,10 @@ export const CustomOgImages: QuartzEmitterPlugin<Partial<SocialImageOptions>> = 
       const headerFont = cfg.theme.typography.header
       const bodyFont = cfg.theme.typography.body
       const fonts = await getSatoriFonts(headerFont, bodyFont)
+      // Space Grotesk/Inter have no Japanese glyphs, so titles/descriptions in
+      // Japanese rendered as mojibake in the generated share-card image. Add a
+      // CJK-capable fallback; satori resolves glyphs from the font stack.
+      fonts.push(...(await getSatoriFonts("Noto Sans JP", "Noto Sans JP")))
 
       for (const [_tree, vfile] of content) {
         if (vfile.data.frontmatter?.socialImage !== undefined) continue
@@ -125,6 +129,7 @@ export const CustomOgImages: QuartzEmitterPlugin<Partial<SocialImageOptions>> = 
       const headerFont = cfg.theme.typography.header
       const bodyFont = cfg.theme.typography.body
       const fonts = await getSatoriFonts(headerFont, bodyFont)
+      fonts.push(...(await getSatoriFonts("Noto Sans JP", "Noto Sans JP")))
 
       // find all slugs that changed or were added
       for (const changeEvent of changeEvents) {
